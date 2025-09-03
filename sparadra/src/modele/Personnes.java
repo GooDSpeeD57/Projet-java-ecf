@@ -5,6 +5,7 @@ import utilitaires.RegexValidator;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.Locale;
 
 public class Personnes implements Serializable {
     @Serial
@@ -37,6 +38,7 @@ public class Personnes implements Serializable {
             throws SaisieException {
         this.setNom(nom);
         this.setPrenom(prenom);
+
     }
 
     public String getNom() {

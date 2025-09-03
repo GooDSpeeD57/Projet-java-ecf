@@ -470,23 +470,6 @@ public class Vue {
 
         return valeur;
     }
-
-    // Méthode conservée pour la compatibilité avec d'autres usages
-    public static String saisieAuteur(String message, String messageException) {
-        String saisie = "";
-        boolean erreur = true;
-
-        do {
-            System.out.println(message);
-            saisie = sc.nextLine().trim();
-            if (!RegexValidator.validerAuteur(saisie)) {
-                System.err.println(messageException);
-            } else {
-                erreur = false;
-            }
-        } while (erreur);
-        return saisie;
-    }
 }
 
 

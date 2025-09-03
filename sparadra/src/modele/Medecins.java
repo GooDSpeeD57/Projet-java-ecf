@@ -1,13 +1,14 @@
 package modele;
 
 import exception.SaisieException;
+import utilitaires.RegexValidator;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class Medecins extends Personnes {
     private String rPPS;
-    private String REGEXRpps = "^10\\d{11}$";
+
     private static List<Medecins> medecins = new ArrayList<Medecins>();
 
     public Medecins(String nom, String prenom, String adresse, String codePostal, String ville, String telephone, String email,String rPPS) throws SaisieException {
@@ -21,8 +22,8 @@ public class Medecins extends Personnes {
     }
 
     public void setRPPS(String rPPS) throws SaisieException {
-        if (rPPS == null || rPPS.trim().length() < 13 || !rPPS.matches(REGEXRpps)) {
-            throw new SaisieException("RPPS non valide ! Merci de saisir 13 chiffres commencent par 10 ");
+        if (!RegexValidator.validerRPPS(rPPS)) {
+            throw new SaisieException("RPPS non valide ! Merci de saisir 11 chiffres commencent par 10 ");
         } else {
             this.rPPS = rPPS;
         }

@@ -3,10 +3,11 @@ package modele;
 import exception.SaisieException;
 import utilitaires.RegexValidator;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Medicaments {
+public class Medicaments implements Serializable {
     private String nomMedicament;
     private String categorieMedicament;
     private double prixMedicament;

@@ -3,30 +3,38 @@ package utilitaires;
 public class RegexValidator {
 
 
-    public static final String REGEX_MOTS = "^[\\p{L}][\\p{L} \\-']*[\\p{L}]$";
-    public static final String REGEX_NSS = "^[12]\\d{2}(0[1-9]|1[0-2]|2[0-9])\\d{8}\\d{2}$";
-    public static final String REGEX_DATE_NAISSANCE = "^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/\\d{4}$";
-    public static final String REGEX_EMAIL = "^((?!\\.)[\\w\\-_.]*[^.])(@\\w+)(\\.\\w+(\\.\\w+)?[^.\\W])$";
-    public static final String REGEX_CODE_POSTAL = "\\d{5}";
-    public static final String REGEX_TELEPHONE = "^(?:\\+33\\s[1-9](?:\\s\\d{2}){4}|0[1-9](?:\\s\\d{2}){4})$";
+//    public static final String REGEX_MOTS = "^[\\p{L}][\\p{L} \\-']{1,}[\\p{L}]$|^[\\p{L}]$";
+//    public static final String REGEX_NSS = "^[12]\\d{2}(0[1-9]|1[0-2]|2[0-9])\\d{8}\\d{2}$";
+//    public static final String REGEX_DATE_NAISSANCE = "^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/\\d{4}$";
+//    public static final String REGEX_EMAIL = "^((?!\\.)[\\w\\-_.]*[^.])(@\\w+)(\\.\\w+(\\.\\w+)?[^.\\W])$";
+//    public static final String REGEX_CODE_POSTAL = "\\d{5}";
+//    public static final String REGEX_TELEPHONE = "^(?:\\+33\\s?[1-9](?:\\s?\\d{2}){4}|0[1-9](?:\\s?\\d{2}){4})$";
 //    public static final String REGEX_ADRESSE = "^(n°\\s*)?(\\d{1,4})(\\s*(bis|ter))?\\s+(rue|avenue|av|boulevard|bd|chemin|allée|impasse|route|place)\\s+([\\p{L}0-9'\\- ]+)$";
-    public static final String REGEX_ADRESSE =  "(?i)^\\d{1,4}\\s+(bis|ter)?\\s*(rue|avenue|boulevard|chemin|allée|impasse|route|place)\\s+([\\p{L}0-9'\\- ]+)$";
-
-    public static final String REGEX_VILLE = "(?i)^(Y|Eu|Lu|Ay|Oz|Uz|\\p{L}+(?:[ '\\-’]\\p{L}+)+)$";
-    public static final String REGEX_RPPS = "^10\\d{11}$";
-    public static final String REGEX_AUTEUR = "^(?! )[A-Za-zÀ-ÖØ-öø-ÿ0-9''\"():;!?.,\\- ]+(?<! )$";
+//    public static final String REGEX_ADRESSE =  "^\\d{1,4}\\s*(bis|ter)?\\s*(rue|avenue|av|boulevard|bd|chemin|allée|impasse|route|place)\\s+.+$";
+//    public static final String REGEX_VILLE = "^[\\p{L}][\\p{L} \\-']*$";
+//    public static final String REGEX_RPPS = "^10\\d{11}$";
+public static final String REGEX_MOTS = "^(?!\\s)(.*\\S)?$";
+    public static final String REGEX_NSS = "^(?!\\s)(.*\\S)?$";
+    public static final String REGEX_DATE_NAISSANCE = "^(?!\\s)(.*\\S)?$";
+    public static final String REGEX_EMAIL = "^(?!\\s)(.*\\S)?$";
+    public static final String REGEX_CODE_POSTAL = "^(?!\\s)(.*\\S)?$";
+    public static final String REGEX_TELEPHONE = "^(?!\\s)(.*\\S)?$";
+    //    public static final String REGEX_ADRESSE = "^(n°\\s*)?(\\d{1,4})(\\s*(bis|ter))?\\s+(rue|avenue|av|boulevard|bd|chemin|allée|impasse|route|place)\\s+([\\p{L}0-9'\\- ]+)$";
+    public static final String REGEX_ADRESSE =  "^(?!\\s)(.*\\S)?$";
+    public static final String REGEX_VILLE = "^(?!\\s)(.*\\S)?$";
+    public static final String REGEX_RPPS = "^10\\d{9}$";
 
 
     public static boolean validerMots(String value) {
-        return value != null && value.trim().length() >= 3 && value.matches(REGEX_MOTS);
+        return value != null &&  value.matches(REGEX_MOTS);
     }
 
     public static boolean validerNSS(String nss) {
-        return nss != null && nss.trim().length() == 15 && nss.matches(REGEX_NSS);
+        return nss != null && nss.matches(REGEX_NSS);
     }
 
     public static boolean validerDateNaissance(String date) {
-        return date != null && date.trim().length() >= 8 && date.matches(REGEX_DATE_NAISSANCE);
+        return date != null  && date.matches(REGEX_DATE_NAISSANCE);
     }
 
     public static boolean validerEmail(String email) {
@@ -50,12 +58,10 @@ public class RegexValidator {
     }
 
     public static boolean validerRPPS(String rpps) {
-        return rpps != null && rpps.trim().length() == 13 && rpps.matches(REGEX_RPPS);
+        return rpps != null && rpps.trim().length() == 11 && rpps.matches(REGEX_RPPS);
     }
 
-    public static boolean validerAuteur(String auteur) {
-        return auteur != null && auteur.matches(REGEX_AUTEUR);
-    }
+
 
     public static boolean validerNomMedicament(String nom) {
         return nom != null && nom.trim().length() >= 3 && nom.matches(REGEX_MOTS);

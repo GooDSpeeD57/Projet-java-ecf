@@ -1,6 +1,7 @@
 package modele;
 
 import exception.SaisieException;
+import utilitaires.RegexValidator;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -8,7 +9,6 @@ import java.util.List;
 public class Mutuelles extends Personnes {
     private String departement;
     private int tdRemboursement;
-    private String REGEXMots = "^\\p{L}+$";
     private static List<Mutuelles> mutuelles = new ArrayList<Mutuelles>();
 
     public Mutuelles(String nom, String adresse
@@ -24,12 +24,18 @@ public class Mutuelles extends Personnes {
         return departement;
     }
 
+//    public void setDepartement(String departement) throws SaisieException {
+//        if (departement == null || departement.trim().isEmpty() || !departement.matches(REGEXMots)) {
+//            throw new SaisieException("Département non vide");
+//        } else {
+//            this.departement = departement;
+//        }
+//    }
     public void setDepartement(String departement) throws SaisieException {
-        if (departement == null || departement.trim().isEmpty() || !departement.matches(REGEXMots)) {
-            throw new SaisieException("Département non vide");
-        } else {
-            this.departement = departement;
+        if (!RegexValidator.validerVille(departement)) {
+            throw new SaisieException("Sélectionnez un médecin ou créez-en un");
         }
+        this.departement = departement;
     }
 
     public int getTdRemboursement() {
@@ -37,11 +43,10 @@ public class Mutuelles extends Personnes {
     }
 
     public void setTdRemboursement(int tdRemboursement) throws SaisieException {
-        if (tdRemboursement < 0 || tdRemboursement > 100) {
-            throw new SaisieException("TD remboursement non valid ! compris entre 0 et 100");
-        } else {
-            this.tdRemboursement = tdRemboursement;
+        if (!RegexValidator.validerTauxRemboursement(tdRemboursement)) {
+            throw new SaisieException("Taux de remboursement invalide ! Doit être entre 0 et 100.");
         }
+        this.tdRemboursement = tdRemboursement;
     }
 
     public static List<Mutuelles> getMutuelles() {

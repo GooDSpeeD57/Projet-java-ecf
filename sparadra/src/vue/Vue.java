@@ -42,81 +42,66 @@ public class Vue {
         System.out.println("║                         ⣿⣿⣿⣿⣿⣶⣤⣤⣤⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿                            ║");
         System.out.println("║                         ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿                            ║");
         System.out.println("║                         ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿                            ║");
-        System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════╣");
+        System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════╝");
     }
     public static void vueMenuglobal(){
-        System.out.println("║         Que voulez vous faire ?                                                          ║");
+        System.out.println("╔══════════════════════════════════════════════════════════════════════════════════════════╗");
+        System.out.println("║         Menu Principal                                                                   ║");
         System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════╣");
-        System.out.println("║ 1 : Enregistrer un Client                                                                ║");
+        System.out.println("║ 1 : Avec ou Sans Ordonnance                                                              ║");
         System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════╣");
-        System.out.println("║ 2 : Enregistrer un Médicament                                                            ║");
+        System.out.println("║ 2 : Gestion Pharmacie                                                                    ║");
         System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════╣");
-        System.out.println("║ 3 : Enregistrer un Médecin                                                               ║");
-        System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════╣");
-        System.out.println("║ 4 : Enregistrer une Mutuelle                                                             ║");
-        System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════╣");
-        System.out.println("║ 5 : Afficher la liste des Clients                                                        ║");
-        System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════╣");
-        System.out.println("║ 6 : Afficher la liste des Medicament                                                     ║");
-        System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════╣");
-        System.out.println("║ 0 : Quitter                                                                              ║");
+        System.out.println("║ 0 : Quitter l'Application                                                                ║");
         System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════╝");
     }
-    public static void vueMenuLivre() {
-
-        System.out.println("║         Que voulez vous faire ?                                                          ║");
+    public static void vueMenuOrdonnance() {
+        System.out.println("╔══════════════════════════════════════════════════════════════════════════════════════════╗");
+        System.out.println("║         Avec Ordonnance                                                                  ║");
         System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════╣");
-        System.out.println("║ 1 : Enregistrer un Client                                                                ║");
+        System.out.println("║ 1 : Rechercher Client                                                                    ║");
         System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════╣");
-        System.out.println("║ 2 : Enregistrer un Médicament                                                            ║");
+        System.out.println("║ 2 : Creation Client                                                                      ║");
         System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════╣");
-        System.out.println("║ 3 : Enregistrer un Médecin                                                               ║");
+        System.out.println("║ 3 : Recherche Médecin                                                                    ║");
         System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════╣");
-        System.out.println("║ 4 : Enregistrer une Mutuelle                                                             ║");
+        System.out.println("║ 4 : Recherche Mutuelle                                                                   ║");
         System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════╣");
-        System.out.println("║ 5 : Afficher la liste des livres                                                         ║");
+        System.out.println("║ 5 : Recherche Médicament                                                                 ║");
         System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════╣");
-        System.out.println("║ 6 : Afficher la liste des prêts                                                          ║");
-        System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════╣");
-        System.out.println("║ 0 : Quitter                                                                              ║");
+        System.out.println("║ 0 : Retour au Menu Précedent                                                             ║");
         System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════╝");
     }
-    public static void vueMenuRechLivre() {
+    public static void vueMenuSansOrdonnance() {
 
-        System.out.println("║         Que voulez vous faire ?                                                          ║");
+        System.out.println("╔══════════════════════════════════════════════════════════════════════════════════════════╗");
+        System.out.println("║         Sans Ordonnance                                                                  ║");
         System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════╣");
-        System.out.println("║ 1 : Enregistrer un Client                                                                ║");
+        System.out.println("║ 1 : Rechercher Client                                                                    ║");
         System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════╣");
-        System.out.println("║ 2 : Enregistrer un Médicament                                                            ║");
+        System.out.println("║ 2 : Creation Client                                                                      ║");
         System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════╣");
-        System.out.println("║ 3 : Enregistrer un Médecin                                                               ║");
+        System.out.println("║ 5 : Recherche Médicament                                                                 ║");
         System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════╣");
-        System.out.println("║ 4 : Enregistrer une Mutuelle                                                             ║");
-        System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════╣");
-        System.out.println("║ 5 : Afficher la liste des livres                                                         ║");
-        System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════╣");
-        System.out.println("║ 6 : Afficher la liste des prêts                                                          ║");
-        System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════╣");
-        System.out.println("║ 0 : Quitter                                                                              ║");
+        System.out.println("║ 0 : Retour au Menu Précedent                                                             ║");
         System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════╝");
     }
-    public static void vueMenuAbonne() {
+    public static void vueMenuMedicament() {
 
-        System.out.println("║         Que voulez vous faire ?                                                          ║");
+        System.out.println("╔══════════════════════════════════════════════════════════════════════════════════════════╗");
+        System.out.println("║         Gestion Pharmacie                                                                ║");
         System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════╣");
-        System.out.println("║ 1 : Enregistrer un Client                                                                ║");
+        System.out.println("║ 1 : Enregistrer un Médicament                                                            ║");
         System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════╣");
-        System.out.println("║ 2 : Enregistrer un Médicament                                                            ║");
+        System.out.println("║ 2 : Enregistrer un Médecin                                                               ║");
         System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════╣");
-        System.out.println("║ 3 : Enregistrer un Médecin                                                               ║");
+        System.out.println("║ 3 : Enregistrer une Mutuelle                                                             ║");
         System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════╣");
-        System.out.println("║ 4 : Enregistrer une Mutuelle                                                             ║");
+        System.out.println("║ 4 : Enregistrer un(e) Pharmacien(ne)                                                     ║");
         System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════╣");
-        System.out.println("║ 5 : Afficher la liste des livres                                                         ║");
+        System.out.println("║ 5 : Liste des ventes                                                                     ║");
         System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════╣");
-        System.out.println("║ 6 : Afficher la liste des prêts                                                          ║");
-        System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════╣");
-        System.out.println("║ 0 : Quitter                                                                              ║");
+        System.out.println("║ 0 : Retour au Menu Précedent                                                             ║");
         System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════╝");
     }
     public static void vueCreationClient() throws SaisieException {

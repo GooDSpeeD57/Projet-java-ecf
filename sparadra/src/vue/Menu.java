@@ -1,60 +1,68 @@
 package vue;
 
+import exception.SaisieException;
+import utilitaires.Saisie;
+
+import java.util.Map;
+import java.util.Scanner;
 public class Menu {
     Scanner sc = new Scanner(System.in);
-    boolean fin = false;
-    while(!fin){
-        Vue.vueMenu();
-        Vue.vueMenuglobal();
-        int choix = Saisie.lireEntier("Votre Choix [1 -6] ou [0] pour quitter : ", "un nombre positif");
+    private static void menuPrincipal() throws SaisieException {
+        boolean fin = false;
+        while (!fin) {
+            Vue.vueMenu();
+            Vue.vueMenuglobal();
+            int choix = Saisie.lireEntier("Votre Choix [1 -2] ou [0] pour quitter : ", "Choix entre 0 1 2");
 
-        switch (choix) {
-            case 0 -> fin = quitterEtSauvegarder(donnees);
-            case 1 -> Vue.vueCreation();
-            case 2 -> Vue.vueCreaLivre();
-            case 3 -> menuGestionLivres();
-            case 4 -> afficherAbonnes();
-            case 5 -> afficherLivres();
-            case 6 -> afficherPrets();
-            default -> System.err.println("! Choix incorrect ! [0-6] !");
+            switch (choix) {
+                case 0 -> fin = quitterEtSauvegarder(donnees);
+                case 1 -> System.out.println(" Avec ou Sans Ordonnance");
+                case 2 -> System.out.println(" Gestion Pharmacie ");
+                default -> System.err.println("! Choix incorrect ! [0-2] !");
+            }
         }
     }
 
-    private static boolean quitterEtSauvegarder(Map<String, Object> donnees) {
-        System.out.println("Sauvegarde en cours...");
-        donnees.put("abonnes", Abonnes.getAbonnes());
-        donnees.put("employes", Employe.getEmployees());
-        donnees.put("livres", Livre.getLivres());
-        donnees.put("prets", Livreprete.getLivrepretes());
-        PersitSerializable.sauvegarder(donnees, FICHIER_PERSISTANCE);
-        System.out.println("Au revoir !");
-        return true;
-    }
 
-    private static void menuGestionLivres() throws SaisieException {
+    private static void menuAvecOrdo() throws SaisieException {
         boolean fin = false;
 
         while (!fin) {
-            Vue.vueMenu();
-            Vue.vueMenuLivre();
+            Vue.vueMenuOrdonnance();
             int choix = Saisie.lireEntier("Votre Choix [1 -5] ou [0] pour retourner au menu principal : ", "Un nombre");
 
             switch (choix) {
                 case 0 -> fin = true;
-                case 1 -> menuRechercheLivre();
-                case 2 -> menuRechercheAbonne();
-                case 3 -> System.out.println("test3");
-                case 4 -> System.out.println("test4");
-                case 5 -> System.out.println("test5");
+                case 1 -> System.out.println(" Recherche client");//effectue la recherche si non trouver demande la creation du client
+                case 2 -> System.out.println(" Creation client");
+                case 3 -> System.out.println("Recherche medecin");
+                case 4 -> System.out.println("Recherche Mutuelle");
+                case 5 -> System.out.println("Recherche Médicament");
                 default -> System.err.println("Choix entre 1-5");
             }
         }
     }
-    private static void menuRechercheLivre() throws SaisieException {
+    private static void menuSansOrdo() throws SaisieException {
         boolean fin = false;
 
         while (!fin) {
-            Vue.vueMenu();
+            Vue.vueMenuOrdonnance();
+            int choix = Saisie.lireEntier("Votre Choix [1 -3] ou [0] pour retourner au menu principal : ", "Un nombre");
+
+            switch (choix) {
+                case 0 -> fin = true;
+                case 1 -> System.out.println(" Recherche client");//effectue la recherche si non trouver demande la creation du client
+                case 2 -> System.out.println(" Creation client");
+                case 3 -> System.out.println("Recherche Médicament");
+                default -> System.err.println("Choix entre [0]-[3]");
+            }
+        }
+    }
+    private static void menuRechercheClient() throws SaisieException {
+        boolean fin = false;
+
+        while (!fin) {
+
             Vue.vueMenuRechLivre();
             int choix = Saisie.lireEntier("Votre Choix [1 -3] ou [0] pour quitter : ", "un NOMBRE !!!!");
 
@@ -90,7 +98,7 @@ public class Menu {
         }
     }
 
-👤 Recherche d’abonné
+
 
     private static void menuRechercheAbonne() throws SaisieException {
         boolean fin = false;
@@ -126,8 +134,17 @@ public class Menu {
             }
         }
     }
+    private static boolean quitterEtSauvegarder(Map<String, Object> donnees) {
+        System.out.println("Sauvegarde en cours...");
+        donnees.put("abonnes", Abonnes.getAbonnes());
+        donnees.put("employes", Employe.getEmployees());
+        donnees.put("livres", Livre.getLivres());
+        donnees.put("prets", Livreprete.getLivrepretes());
+        PersitSerializable.sauvegarder(donnees, FICHIER_PERSISTANCE);
+        System.out.println("Au revoir !");
+        return true;
+    }
 
-📋 Affichage des listes
 
     private static void afficherAbonnes() {
         System.out.println("----- Liste des abonnés -----");

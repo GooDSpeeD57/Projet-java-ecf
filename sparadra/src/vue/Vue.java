@@ -48,11 +48,22 @@ public class Vue {
         System.out.println("╔══════════════════════════════════════════════════════════════════════════════════════════╗");
         System.out.println("║         Menu Principal                                                                   ║");
         System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════╣");
-        System.out.println("║ 1 : Avec ou Sans Ordonnance                                                              ║");
+        System.out.println("║ 1 : Choix du type de vente                                                               ║");
         System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════╣");
         System.out.println("║ 2 : Gestion Pharmacie                                                                    ║");
         System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════╣");
         System.out.println("║ 0 : Quitter l'Application                                                                ║");
+        System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════╝");
+    }
+    public static void vueMenuAvecSansOrdonnance(){
+        System.out.println("╔══════════════════════════════════════════════════════════════════════════════════════════╗");
+        System.out.println("║         Choix du type de vente                                                           ║");
+        System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════╣");
+        System.out.println("║ 1 : Avec Ordonnance                                                                      ║");
+        System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════╣");
+        System.out.println("║ 2 : Sans Ordonnance                                                                      ║");
+        System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════╣");
+        System.out.println("║ 0 : Retour au Menu Principal                                                             ║");
         System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════╝");
     }
     public static void vueMenuOrdonnance() {
@@ -103,6 +114,64 @@ public class Vue {
         System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════╣");
         System.out.println("║ 0 : Retour au Menu Précedent                                                             ║");
         System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════╝");
+        }
+    public static void vueMenuRechercheClients(){
+        System.out.println("╔══════════════════════════════════════════════════════════════════════════════════════════╗");
+        System.out.println("║         Recherche de Client                                                              ║");
+        System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════╣");
+        System.out.println("║ 1 : Recherche par Nom                                                                    ║");
+        System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════╣");
+        System.out.println("║ 2 : Recherche par Numéro de Sécurité Sociale                                             ║");
+        System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════╣");
+        System.out.println("║ 3 : Recherche par Email                                                                  ║");
+        System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════╣");
+        System.out.println("║ 0 : Retour                                                                               ║");
+        System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════╝");
+    }
+    public static void vueMenuRechercheMedecin(){
+        System.out.println("╔══════════════════════════════════════════════════════════════════════════════════════════╗");
+        System.out.println("║         Recherche de Médecin                                                             ║");
+        System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════╣");
+        System.out.println("║ 1 : Recherche par Nom                                                                    ║");
+        System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════╣");
+        System.out.println("║ 2 : Recherche par RPPS                                                                   ║");
+        System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════╣");
+        System.out.println("║ 3 : Afficher tous les médecins                                                           ║");
+        System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════╣");
+        System.out.println("║ 0 : Retour                                                                               ║");
+        System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════╝");
+    }
+    public static void vueMenuRechercheMutuelle(){
+        System.out.println("╔══════════════════════════════════════════════════════════════════════════════════════════╗");
+        System.out.println("║         Recherche de Mutuelle                                                            ║");
+        System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════╣");
+        System.out.println("║ 1 : Recherche par Nom                                                                    ║");
+        System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════╣");
+        System.out.println("║ 2 : Recherche par Département                                                            ║");
+        System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════╣");
+        System.out.println("║ 3 : Afficher toutes les mutuelles                                                        ║");
+        System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════╣");
+        System.out.println("║ 0 : Retour                                                                               ║");
+        System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════╝");
+    }
+    public static void vueMenuRechercheMedicament(){
+        System.out.println("╔══════════════════════════════════════════════════════════════════════════════════════════╗");
+        System.out.println("║         Recherche de Médicament                                                          ║");
+        System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════╣");
+        System.out.println("║ 1 : Recherche par Nom                                                                    ║");
+        System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════╣");
+        System.out.println("║ 2 : Recherche par Catégorie                                                              ║");
+        System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════╣");
+        System.out.println("║ 3 : Afficher tous les médicaments                                                        ║");
+        System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════╣");
+        System.out.println("║ 0 : Retour                                                                               ║");
+        System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════╝");
+    }
+    public static void afficherListeVentes() {
+        System.out.println("╔══════════════════════════════════════════════════════════════════════════════════════════╗");
+        System.out.println("║                                     Liste des ventes                                     ║");
+        System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════╝");
+        System.out.println("Fonctionnalité à implémenter...");
     }
     public static void vueCreationClient() throws SaisieException {
         System.out.println("Création d'un Client");

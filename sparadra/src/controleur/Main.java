@@ -59,25 +59,11 @@ public class Main {
 //        Pharmaciens p3 = new Pharmaciens("Marconato", "Isabelle", "10001195113");
 //        Pharmaciens p4 = new Pharmaciens("Schillinger", "Sarah", "10101010101");
 //        Pharmaciens p5 = new Pharmaciens("Rowdo", "Lorene", "10010101010");
-//        Mutuelles mu1 = new Mutuelles("Caisse Régional Crédit Agricole Mutuelle Lorraine",
-//                "56 Avenue André Malraux", "57000", "Metz", "09 64 40 37 11",
-//                "contact@ca-mutu-elle-lorraine.fr", "57", 70);
-//
-//        Mutuelles mu2 = new Mutuelles("Mutuelle Nationale Territoriale - Section Metz",
-//                "1 rue du Pont Moreau", "57000", "Metz", "03 87 37 58 32",
-//                "service@mnt.fr", "57", 75);
-//
-//        Mutuelles mu3 = new Mutuelles("MNT (Mutuelle Nationale Territoriale) - Agence Mitterrand",
-//                "16 avenue François Mitterrand", "57000", "Metz", "09 72 72 02 02",
-//                "metz@mnt.fr", "57", 75);
-//
-//        Mutuelles mu4 = new Mutuelles("Mutlor - Les Mutuelles de Lorraine",
-//                "11 Rue du Colonel Merlin", "54400", "Longwy", "03 82 25 79 00",
-//                "contact@mutlor.fr", "57", 65);
-//
-//        Mutuelles mu5 = new Mutuelles("Mutlor - Les Mutuelles de Lorraine (Nancy)",
-//                "6 Rue de la Visitation", "54000", "Nancy", "+33 3 83 36 77 07",
-//                "nancy@mutlor.fr", "54", 65);
+//        Mutuelles mu1 = new Mutuelles("Caisse Régional Crédit Agricole Mutuelle Lorraine","56 Avenue André Malraux","57000","Metz","09 64 40 37 11","contact@ca-mutu-elle-lorraine.fr","57",70);
+//        Mutuelles mu2 = new Mutuelles("Mutuelle Nationale Territoriale - Section Metz","1 rue du Pont Moreau","57000","Metz","03 87 37 58 32","service@mnt.fr","57",75);
+//        Mutuelles mu3 = new Mutuelles("MNT (Mutuelle Nationale Territoriale) - Agence Mitterrand","16 avenue François Mitterrand","57000","Metz","09 72 72 02 02","metz@mnt.fr","57",75);
+//        Mutuelles mu4 = new Mutuelles("Mutlor - Les Mutuelles de Lorraine","11 Rue du Colonel Merlin","54400","Longwy","03 82 25 79 00","contact@mutlor.fr","57",65);
+//        Mutuelles mu5 = new Mutuelles("Mutlor - Les Mutuelles de Lorraine (Nancy)","6 Rue de la Visitation","54000","Nancy","+33 3 83 36 77 07","nancy@mutlor.fr","54",65);
 //        Medicaments me1 = new Medicaments("Doliprane", "Antalgique", 2.50, "2021-01-15", 150, "Oui");
 //        Medicaments me2 = new Medicaments("Amoxicilline", "Antibiotique", 8.90, "2020-06-30", 75, "Non");
 //        Medicaments me3 = new Medicaments("Spasfon", "Antispasmodique", 3.20, "2019-11-10", 120, "Oui");

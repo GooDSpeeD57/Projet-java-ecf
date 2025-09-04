@@ -18,7 +18,7 @@ public class Saisie {
                     valide = true;
                 }
             }catch(NumberFormatException e){
-                System.err.println("Entrer un nombre valide");
+                System.err.println("Entrez un nombre valide");
             }
         }
         return valeur;

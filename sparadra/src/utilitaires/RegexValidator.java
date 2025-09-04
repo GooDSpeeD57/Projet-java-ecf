@@ -19,7 +19,6 @@ public static final String REGEX_MOTS = "^(?!\\s)(.*\\S)?$";
     public static final String REGEX_EMAIL = "^(?!\\s)(.*\\S)?$";
     public static final String REGEX_CODE_POSTAL = "^(?!\\s)(.*\\S)?$";
     public static final String REGEX_TELEPHONE = "^(?!\\s)(.*\\S)?$";
-    //    public static final String REGEX_ADRESSE = "^(n°\\s*)?(\\d{1,4})(\\s*(bis|ter))?\\s+(rue|avenue|av|boulevard|bd|chemin|allée|impasse|route|place)\\s+([\\p{L}0-9'\\- ]+)$";
     public static final String REGEX_ADRESSE =  "^(?!\\s)(.*\\S)?$";
     public static final String REGEX_VILLE = "^(?!\\s)(.*\\S)?$";
     public static final String REGEX_RPPS = "^10\\d{9}$";

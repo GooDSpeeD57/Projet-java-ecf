@@ -9,8 +9,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
-import static vue.Vue.afficherListeVentes;
-
 public class Menu2 {
     private static final String FICHIER_PERSISTANCE = "donnees.bin";
     private static Map<String, Object> donnees;
@@ -122,8 +120,18 @@ public class Menu2 {
                 int choix = Saisie.lireEntier("Votre Choix [1-3] ou [0] pour retourner : ", "Un nombre entre 0 et 3");
                 switch (choix) {
                     case 0 -> fin = true;
-                    case 1 -> rechercherClientParNom();
-                    case 2 -> rechercherClientParNSS();
+                    case 1 -> {
+                        System.out.print("Nom du client à rechercher : ");
+                        String nom = Saisie.lireChaine();
+                        List<Clients> resultats = rechercherClientParNom(nom);
+                        afficherResultatsClients(resultats, "nom \"" + nom + "\"");
+                    }
+                    case 2 -> {
+                        System.out.print("N° de sécurité sociale du client : ");
+                        String nss = Saisie.lireChaine();
+                        List<Clients> resultats = rechercherClientParNSS(nss);
+                        afficherResultatsClients(resultats, "NSS \"" + nss + "\"");
+                    }
                     case 3 -> rechercherClientParEmail();
                     default -> System.err.println("Choix entre 0-3");
             }
@@ -175,133 +183,125 @@ public class Menu2 {
         }
     }
 
-    public static List<> rechercherClient(String nom) {
+    public static List<Clients> rechercherClientParNom(String nom) {
         List<Clients> resultats = new ArrayList<>();
-        for (Abonnes abonne : abonnes) {
-            if (abonne.getMail().toLowerCase().contains(email.toLowerCase())) {
-                resultats.add(abonne);
+        for (Clients client : Clients.getClients()) {
+            if (client.getNom().toLowerCase().contains(nom.toLowerCase())) {
+                resultats.add(client);
             }
         }
         return resultats;
     }
 
-    private static void rechercherClientParNom() {
-        System.out.print("Nom du client à rechercher : ");
-        String nom = Saisie.lireChaine();
 
-        List<Clients> clientsTrouves = Clients.getClients().stream()
-                .filter(c -> c.getNom().toLowerCase().contains(nom.toLowerCase()))
-                .toList();
-
-        afficherResultatsClients(clientsTrouves, "nom \"" + nom + "\"");
+    public static List<Clients> rechercherClientParNSS(String nSs) {
+        List<Clients> resultats = new ArrayList<>();
+        for (Clients client : Clients.getClients()) {
+            if (client.getNSs().toLowerCase().contains(nSs.toLowerCase())) {
+                resultats.add(client);
+            }
+        }
+        return resultats;
     }
 
-    private static void rechercherClientParNSS() {
-        System.out.print("Numéro de sécurité sociale : ");
-        String nss = Saisie.lireChaine();
-
-        List<Clients> clientsTrouves = Clients.getClients().stream()
-                .filter(c -> c.getNSs().equals(nss))
-                .toList();
-
-        afficherResultatsClients(clientsTrouves, "NSS \"" + nss + "\"");
+    public static List<Clients> rechercherClientParEmail(String email) {
+        List<Clients> resultats = new ArrayList<>();
+        for (Clients client : Clients.getClients()) {
+            if (client.getEmail().toLowerCase().contains(email.toLowerCase())) {
+                resultats.add(client);
+            }
+        }
+        return resultats;
+    }
+    public static List<Medecins> rechercherMedecinParNom(String nom) {
+        List<Medecins> resultats = new ArrayList<>();
+        for (Medecins medecin : Medecins.getMedecins()) {
+            if (medecin.getNom().toLowerCase().contains(nom.toLowerCase())) {
+                resultats.add(medecin);
+            }
+        }
+        return resultats;
     }
 
-    private static void rechercherClientParEmail() {
-        System.out.print("Email du client : ");
-        String email = Saisie.lireChaine();
-
-        List<Clients> clientsTrouves = Clients.getClients().stream()
-                .filter(c -> c.getEmail().toLowerCase().contains(email.toLowerCase()))
-                .toList();
-
-        afficherResultatsClients(clientsTrouves, "email \"" + email + "\"");
+    public static List<Medecins> rechercherMedecinParRPPS(String RPPS) {
+        List<Medecins> resultats = new ArrayList<>();
+        for (Medecins medecins : Medecins.getMedecins()) {
+            if (medecins.getRPPS().toLowerCase().contains(RPPS.toLowerCase())) {
+                resultats.add(medecins);
+            }
+        }
+        return resultats;
     }
-
-    // Méthodes de recherche pour les médecins
-    private static void rechercherMedecinParNom() {
-        System.out.print("Nom du médecin à rechercher : ");
-        String nom = Saisie.lireChaine();
-
-        List<Medecins> medecinsTrouves = Medecins.getMedecins().stream()
-                .filter(m -> m.getNom().toLowerCase().contains(nom.toLowerCase()) ||
-                        m.getPrenom().toLowerCase().contains(nom.toLowerCase()))
-                .toList();
-
-        afficherResultatsMedecins(medecinsTrouves, "nom \"" + nom + "\"");
-    }
-
-    private static void rechercherMedecinParRPPS() {
-        System.out.print("Numéro RPPS : ");
-        String rpps = Saisie.lireChaine();
-
-        List<Medecins> medecinsTrouves = Medecins.getMedecins().stream()
-                .filter(m -> m.getRPPS().equals(rpps))
-                .toList();
-
-        afficherResultatsMedecins(medecinsTrouves, "RPPS \"" + rpps + "\"");
-    }
-
     private static void afficherTousLesMedecins() {
-        afficherResultatsMedecins(Medecins.getMedecins(), "tous les médecins");
+        for (Medecins medecins : Medecins.getMedecins()) {
+            System.out.println("==================================");
+            System.out.println(medecins);
+        }
     }
 
-    // Méthodes de recherche pour les mutuelles
-    private static void rechercherMutuelleParNom() {
-        System.out.print("Nom de la mutuelle : ");
-        String nom = Saisie.lireChaine();
-
-        List<Mutuelles> mutuellesTrouvees = Mutuelles.getMutuelles().stream()
-                .filter(m -> m.getNom().toLowerCase().contains(nom.toLowerCase()))
-                .toList();
-
-        afficherResultatsMutuelles(mutuellesTrouvees, "nom \"" + nom + "\"");
+    public static List<Mutuelles> rechercherMutuelleParNom(String nom) {
+        List<Mutuelles> resultats = new ArrayList<>();
+        for (Mutuelles mutuelles : Mutuelles.getMutuelles()) {
+            if (mutuelles.getNom().toLowerCase().contains(nom.toLowerCase())) {
+                resultats.add(mutuelles);
+            }
+        }
+        return resultats;
     }
-
-    private static void rechercherMutuelleParDepartement() {
-        System.out.print("Département : ");
-        String departement = Saisie.lireChaine();
-
-        List<Mutuelles> mutuellesTrouvees = Mutuelles.getMutuelles().stream()
-                .filter(m -> m.getDepartement().toLowerCase().contains(departement.toLowerCase()))
-                .toList();
-
-        afficherResultatsMutuelles(mutuellesTrouvees, "département \"" + departement + "\"");
+    public static List<Mutuelles> rechercherMutuelleParDepartement(String departement) {
+        List<Mutuelles> resultats = new ArrayList<>();
+        for (Mutuelles mutuelles : Mutuelles.getMutuelles()) {
+            if(mutuelles.getDepartement().equals(departement)) {
+                resultats.add(mutuelles);
+            }
+        }
+        return resultats;
     }
 
     private static void afficherToutesLesMutuelles() {
-        afficherResultatsMutuelles(Mutuelles.getMutuelles(), "toutes les mutuelles");
+        for (Mutuelles mutuelles : Mutuelles.getMutuelles()) {
+            System.out.println("==================================");
+            System.out.println(mutuelles);
+        }
     }
 
-    // Méthodes de recherche pour les médicaments
-    private static void rechercherMedicamentParNom() {
-        System.out.print("Nom du médicament : ");
-        String nom = Saisie.lireChaine();
-
-        List<Medicaments> medicamentsTrouves = Medicaments.getMedicaments().stream()
-                .filter(m -> m.getNomMedicament().toLowerCase().contains(nom.toLowerCase()))
-                .toList();
-
-        afficherResultatsMedicaments(medicamentsTrouves, "nom \"" + nom + "\"");
+    public static List<Medicaments> rechercherNomMedicament(String nom) {
+        List<Medicaments> resultats = new ArrayList<>();
+        for (Medicaments medicaments : Medicaments.getMedicaments()) {
+            if (medicaments.getNomMedicament().toLowerCase().contains(nom.toLowerCase())) {
+                resultats.add(medicaments);
+            }
+        }
+        return resultats;
     }
 
-    private static void rechercherMedicamentParCategorie() {
-        System.out.print("Catégorie : ");
-        String categorie = Saisie.lireChaine();
-
-        List<Medicaments> medicamentsTrouves = Medicaments.getMedicaments().stream()
-                .filter(m -> m.getCategorieMedicament().toLowerCase().contains(categorie.toLowerCase()))
-                .toList();
-
-        afficherResultatsMedicaments(medicamentsTrouves, "catégorie \"" + categorie + "\"");
+    public static List<Medicaments> rechercherParCategorie(String nom) {
+        List<Medicaments> resultats = new ArrayList<>();
+        for (Medicaments medicaments : Medicaments.getMedicaments()) {
+            if (medicaments.getCategorieMedicament().toLowerCase().contains(nom.toLowerCase())) {
+                resultats.add(medicaments);
+            }
+        }
+        return resultats;
     }
 
-    private static void afficherTousLesMedicaments() {
-        afficherResultatsMedicaments(Medicaments.getMedicaments(), "tous les médicaments");
-    }
 
-    // Méthodes d'affichage des résultats
-    private static void afficherResultatsClients(List<Clients> clients, String critere) {
+    public static void afficherResultatsMedicamentsParCategorie(String nomCategorie) {
+        List<Medicaments> resultats = rechercherParCategorie(nomCategorie);
+            if (resultats.isEmpty()) {
+                System.out.println("Aucun médicament trouvé pour la catégorie : " + nomCategorie);
+            } else {
+                System.out.println("Médicaments trouvés pour la catégorie : " + nomCategorie);
+                for (Medicaments medicament : resultats) {
+                    System.out.println("==================================");
+                    System.out.println(medicament);
+                }
+            }
+        }
+
+
+
+        private static void afficherResultatsClients(List<Clients> clients, String critere) {
         if (clients.isEmpty()) {
             System.out.println("Aucun client trouvé pour : " + critere);
         } else {

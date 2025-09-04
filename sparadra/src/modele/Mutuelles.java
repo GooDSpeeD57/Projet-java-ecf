@@ -24,13 +24,6 @@ public class Mutuelles extends Personnes {
         return departement;
     }
 
-//    public void setDepartement(String departement) throws SaisieException {
-//        if (departement == null || departement.trim().isEmpty() || !departement.matches(REGEXMots)) {
-//            throw new SaisieException("Département non vide");
-//        } else {
-//            this.departement = departement;
-//        }
-//    }
     public void setDepartement(String departement) throws SaisieException {
         if (!RegexValidator.validerVille(departement)) {
             throw new SaisieException("Sélectionnez un médecin ou créez-en un");

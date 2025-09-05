@@ -3,6 +3,7 @@ package vue;
 import exception.SaisieException;
 import modele.*;
 import utilitaires.PersitSerializable;
+import utilitaires.RegexValidator;
 import utilitaires.Saisie;
 
 import java.util.ArrayList;
@@ -121,8 +122,8 @@ public class Menu2 {
                 switch (choix) {
                     case 0 -> fin = true;
                     case 1 -> {
-                        System.out.print("Nom du client à rechercher : ");
-                        String nom = Saisie.lireChaine();
+                        System.out.print("Nom du client à rechercher : \n");
+                        String nom = RegexValidator.validerMots("nom");
                         List<Clients> resultats = rechercherClientParNom(nom);
                         afficherResultatsClients(resultats, "nom \"" + nom + "\"");
                     }
@@ -132,53 +133,88 @@ public class Menu2 {
                         List<Clients> resultats = rechercherClientParNSS(nss);
                         afficherResultatsClients(resultats, "NSS \"" + nss + "\"");
                     }
-                    case 3 -> rechercherClientParEmail();
+                    case 3 -> {
+                        System.out.print("Email du client à rechercher : ");
+                        String email = Saisie.lireChaine();
+                        List<Clients> resultats = rechercherClientParEmail(email);
+                        afficherResultatsClients(resultats, "email \"" + email + "\"");
+                    }
                     default -> System.err.println("Choix entre 0-3");
+                }
             }
-        }
     }
 
     private static void menuRechercheMedecin() throws SaisieException {
         boolean fin = false;
-            while (!fin) {
-                Vue.vueMenuRechercheMedecin();
-                int choix = Saisie.lireEntier("Votre Choix [1-3] ou [0] pour retourner : ", "Un nombre entre 0 et 3");
-                switch (choix) {
-                    case 0 -> fin = true;
-                    case 1 -> rechercherMedecinParNom();
-                    case 2 -> rechercherMedecinParRPPS();
-                    case 3 -> afficherTousLesMedecins();
-                    default -> System.err.println("Choix entre 0-3");
+        while (!fin) {
+            Vue.vueMenuRechercheMedecin();
+            int choix = Saisie.lireEntier("Votre Choix [1-3] ou [0] pour retourner : ", "Un nombre entre 0 et 3");
+            switch (choix) {
+                case 0 -> fin = true;
+                case 1 -> {
+                    System.out.print("Nom du médecin à rechercher : ");
+                    String nom = Saisie.lireChaine();
+                    List<Medecins> resultats = rechercherMedecinParNom(nom);
+                    afficherResultatsMedecins(resultats, "nom \"" + nom + "\"");
+                }
+                case 2 -> {
+                    System.out.print("N° RPPS du médecin : ");
+                    String rpps = Saisie.lireChaine();
+                    List<Medecins> resultats = rechercherMedecinParRPPS(rpps);
+                    afficherResultatsMedecins(resultats, "RPPS \"" + rpps + "\"");
+                }
+                case 3 -> afficherTousLesMedecins();
+                default -> System.err.println("Choix entre 0-3");
             }
         }
     }
 
     private static void menuRechercheMutuelle() throws SaisieException {
         boolean fin = false;
-            while (!fin) {
-                Vue.vueMenuRechercheMutuelle();
-                int choix = Saisie.lireEntier("Votre Choix [1-3] ou [0] pour retourner : ", "Un nombre entre 0 et 3");
-                switch (choix) {
-                    case 0 -> fin = true;
-                    case 1 -> rechercherMutuelleParNom();
-                    case 2 -> rechercherMutuelleParDepartement();
-                    case 3 -> afficherToutesLesMutuelles();
-                    default -> System.err.println("Choix entre 0-3");
+        while (!fin) {
+            Vue.vueMenuRechercheMutuelle();
+            int choix = Saisie.lireEntier("Votre Choix [1-3] ou [0] pour retourner : ", "Un nombre entre 0 et 3");
+            switch (choix) {
+                case 0 -> fin = true;
+                case 1 -> {
+                    System.out.print("Nom de la mutuelle à rechercher : ");
+                    String nom = Saisie.lireChaine();
+                    List<Mutuelles> resultats = rechercherMutuelleParNom(nom);
+                    afficherResultatsMutuelles(resultats, "nom \"" + nom + "\"");
+                }
+                case 2 -> {
+                    System.out.print("Département de la mutuelle : ");
+                    String departement = Saisie.lireChaine();
+                    List<Mutuelles> resultats = rechercherMutuelleParDepartement(departement);
+                    afficherResultatsMutuelles(resultats, "département \"" + departement + "\"");
+                }
+                case 3 -> afficherToutesLesMutuelles();
+                default -> System.err.println("Choix entre 0-3");
             }
         }
     }
 
     private static void menuRechercheMedicament() throws SaisieException {
         boolean fin = false;
-            while (!fin) {
-                Vue.vueMenuRechercheMedicament();
-                int choix = Saisie.lireEntier("Votre Choix [1-3] ou [0] pour retourner : ", "Un nombre entre 0 et 3");
-                switch (choix) {
-                    case 0 -> fin = true;
-                    case 1 -> rechercherMedicamentParNom();
-                    case 2 -> rechercherMedicamentParCategorie();
-                    case 3 -> afficherTousLesMedicaments();
-                    default -> System.err.println("Choix entre 0-3");
+        while (!fin) {
+            Vue.vueMenuRechercheMedicament();
+            int choix = Saisie.lireEntier("Votre Choix [1-3] ou [0] pour retourner : ", "Un nombre entre 0 et 3");
+            switch (choix) {
+                case 0 -> fin = true;
+                case 1 -> {
+                    System.out.print("Nom du médicament à rechercher : ");
+                    String nom = Saisie.lireChaine();
+                    List<Medicaments> resultats = rechercherNomMedicament(nom);
+                    afficherResultatsMedicaments(resultats, "nom \"" + nom + "\"");
+                }
+                case 2 -> {
+                    System.out.print("Catégorie du médicament : ");
+                    String categorie = Saisie.lireChaine();
+                    List<Medicaments> resultats = rechercherParCategorie(categorie);
+                    afficherResultatsMedicaments(resultats, "catégorie \"" + categorie + "\"");
+                }
+                case 3 -> afficherTousLesMedicaments();
+                default -> System.err.println("Choix entre 0-3");
             }
         }
     }
@@ -285,6 +321,12 @@ public class Menu2 {
         return resultats;
     }
 
+    private static void afficherTousLesMedicaments() {
+        for (Medicaments medicament : Medicaments.getMedicaments()) {
+            System.out.println("==================================");
+            System.out.println(medicament);
+        }
+    }
 
     public static void afficherResultatsMedicamentsParCategorie(String nomCategorie) {
         List<Medicaments> resultats = rechercherParCategorie(nomCategorie);

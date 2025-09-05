@@ -24,7 +24,6 @@ public class Saisie {
         return valeur;
     }
     public static String lireChaine() {
-        sc.nextLine();
-        return sc.nextLine();
+        return sc.nextLine().trim();
     }
 }

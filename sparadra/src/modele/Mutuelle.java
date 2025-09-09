@@ -1,0 +1,138 @@
+package modele;
+
+import exception.SaisieException;
+import utilitaires.RegexValidator;
+
+import java.io.Serial;
+import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
+
+
+public class Mutuelle implements Serializable {
+    @Serial
+    private static final long serialVersionUID = 1L;
+    private String nom,adresse,codePostal,ville,telephone,email,departement;
+    private int tRemboursement;
+    private static List<Mutuelle> mutuelle = new ArrayList<>();
+
+    public Mutuelle(String nom, String adresse, String codePostal,
+                     String ville, String telephone, String email,String departement,int tRemboursement)
+            throws SaisieException {
+        this.setNom(nom);
+        this.setAdresse(adresse);
+        this.setCodePostal(codePostal);
+        this.setVille(ville);
+        this.setTelephone(telephone);
+        this.setEmail(email);
+        this.setDepartement(departement);
+        this.setTRemboursement(tRemboursement);
+        mutuelle.add(this);
+    }
+
+
+    public String getNom() {
+        return this.nom;
+    }
+
+    public void setNom(String nom) throws SaisieException {
+        if (RegexValidator.validerMots(nom)) {
+            throw new SaisieException("Erreur dans le nom ! Merci de corriger");
+        }
+        this.nom = nom;
+    }
+
+    public void setAdresse(String adresse) throws SaisieException {
+        if (RegexValidator.validerAdresse(adresse)) {
+            throw new SaisieException("Erreur dans l'adresse ! Merci de corriger");
+        }
+        this.adresse = adresse;
+    }
+
+    public String getCodePostal() {
+        return this.codePostal;
+    }
+
+    public void setCodePostal(String codePostal) throws SaisieException {
+        if (RegexValidator.validerCodePostal(codePostal)) {
+            throw new SaisieException("Erreur dans le code postal ! Merci de corriger");
+        }
+        this.codePostal = codePostal;
+    }
+
+    public String getVille() {
+        return this.ville;
+    }
+
+    public void setVille(String ville) throws SaisieException {
+        if (RegexValidator.validerVille(ville)) {
+            throw new SaisieException("Erreur dans la ville ! Merci de corriger");
+        }
+        this.ville = ville;
+    }
+
+    public String getTelephone() {
+        return this.telephone;
+    }
+
+    public void setTelephone(String telephone) throws SaisieException {
+        if (RegexValidator.validerTelephone(telephone)) {
+            throw new SaisieException("Erreur le N° de telephone est incorrecte ! Merci de corriger");
+        }
+        this.telephone = telephone;
+    }
+
+    public String getEmail() {
+        return this.email;
+    }
+
+    public void setEmail(String email) throws SaisieException {
+        if (RegexValidator.validerEmail(email)) {
+            throw new SaisieException("Erreur Mail est incorrecte ! Merci de corriger");
+        }
+        this.email = email;
+    }
+
+    public String getDepartement() {
+        return departement;
+    }
+
+    public void setDepartement(String departement) throws SaisieException {
+        if (RegexValidator.validerVille(departement)) {
+            throw new SaisieException("Département inconnu");
+        }
+        this.departement = departement;
+    }
+
+    public int getTRemboursement() {
+        return tRemboursement;
+    }
+
+    public void setTRemboursement(int tRemboursement) throws SaisieException {
+        if (RegexValidator.validerTauxRemboursement(tRemboursement)) {
+            throw new SaisieException("Taux de remboursement invalide ! Doit être entre 0 et 100.");
+        }
+        this.tRemboursement = tRemboursement;
+    }
+
+    public static List<Mutuelle> getMutuelle() {
+        return mutuelle;
+    }
+
+    public static void setMutuelle(List<Mutuelle> mutuelle) {
+        Mutuelle.mutuelle = mutuelle;
+    }
+
+    public String toString(){return
+            "\nNom : "+this.nom
+            +"\nAdresse : "+this.adresse
+             +"\nCodePostal : "+this.codePostal
+              +"\nVille : "+this.ville
+               +"\nTelephone : "+this.telephone
+                +"\nEmail : "+this.email
+                 +"\nDépartement : " + this.departement
+                  +"\nTaux de remboursement : " + this.tRemboursement;
+    }
+}
+
+

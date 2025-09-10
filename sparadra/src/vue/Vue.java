@@ -1,22 +1,17 @@
 package vue;
 import exception.SaisieException;
-import modele.Clients;
-import modele.Medicaments;
-import modele.Medecins;
-import modele.Mutuelles;
-import modele.Ordonnance;
-import modele.Pharmaciens;
+import modele.Client;
+import modele.Medicament;
+import modele.Medecin;
+import modele.Mutuelle;
+import modele.Pharmacien;
 import utilitaires.RegexValidator;
 
 import java.util.Scanner;
 
 public class Vue {
     private static Scanner sc = new Scanner(System.in);
-    private static String nom, prenom, adresse, codePostal, ville, telephone, email, nSs
-            , dateNaissance, mutuelle, medecinRef, rPPS, nomMedicament, categorieMedicament
-            , dateMiseEnCirculation, sansOrdonnanceMedicament, departement;
-    private static int tdRemboursement, quantiteMedicament;
-    private static double prixMedicament;
+
 
     public static void vueMenu() {
 
@@ -27,21 +22,21 @@ public class Vue {
         System.out.println("║                                   Application Sparadra                                   ║");
         System.out.println("║                                                                                          ║");
         System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════╣");
-        System.out.println("║                         ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿                            ║");
-        System.out.println("║                         ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿                            ║");
-        System.out.println("║                         ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⠋⣉⣤⣤⣤⣉⠛⢿⣿⣿⣿                            ║");
-        System.out.println("║                         ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠟⠋⣠⣴⡾⠟⠋⠉⠉⠉⠓⠀⠹⣿⣿                            ║");
-        System.out.println("║                         ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⠛⢁⣠⣶⡿⠟⠉⠀⠀  ⠀⠀⠀⠀⠀⠀⠀⢻⣿                            ║");
-        System.out.println("║                         ⣿⣿⣿⣿⣿⣿⣿⡿⠟⢋⣠⣴⣾⣿⣿⣅⠀⠀⠀⠀⠀⠀⠀⠀   ⠀⠀⠀⠀⣸⣿                            ║");
-        System.out.println("║                         ⣿⣿⣿⣿⡿⠋⣁⣤⣶⣿⣿⣿⣿⣿⣿⣿⣷⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀  ⣠⣿⣿                            ║");
-        System.out.println("║                         ⣿⣿⡿⢁⣴⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡷⠀⠀⠀⠀⠀⠀ ⠀⣀⣴⣿⣿⣿                             ║");
-        System.out.println("║                         ⣿⡿⠀⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⠛⠁⣀⡀⠀⠀⢀⣠⣴⣿⣿⣿⣿⣿⣿                             ║");
-        System.out.println("║                         ⣿⡇⠀⣿⣿⣿⣿⣿⣿⣿⡿⠟⠋⢁⣤⡶⠟⠋⣠⣴⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿                            ║");
-        System.out.println("║                         ⣿⣿⡀⢻⣯⡙⠛⠛⠋⠁⣀⣤⠾⠛⢁⣤⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿                            ║");
-        System.out.println("║                         ⣿⣿⣿⣄⡙⠻⠿⣶⠶⠿⠋⣁⣴⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿                            ║");
-        System.out.println("║                         ⣿⣿⣿⣿⣿⣶⣤⣤⣤⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿                            ║");
-        System.out.println("║                         ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿                            ║");
-        System.out.println("║                         ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿                            ║");
+        System.out.println("║                         ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿                           ║");
+        System.out.println("║                         ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿                           ║");
+        System.out.println("║                         ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⠋⣉⣤⣤⣤⣉⠛⢿⣿⣿⣿                           ║");
+        System.out.println("║                         ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠟⠋⣠⣴⡾⠟⠋⠉⠉⠉⠓⠀⠹⣿⣿                           ║");
+        System.out.println("║                         ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⠛⢁⣠⣶⡿⠟⠉⠀⠀  ⠀⠀⠀⠀⠀⠀⠀⢻⣿                           ║");
+        System.out.println("║                         ⣿⣿⣿⣿⣿⣿⣿⡿⠟⢋⣠⣴⣾⣿⣿⣅⠀⠀⠀⠀⠀⠀⠀⠀   ⠀⠀⠀⠀⣸⣿                           ║");
+        System.out.println("║                         ⣿⣿⣿⣿⡿⠋⣁⣤⣶⣿⣿⣿⣿⣿⣿⣿⣷⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀  ⣠⣿⣿                           ║");
+        System.out.println("║                         ⣿⣿⡿⢁⣴⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡷⠀⠀⠀⠀⠀⠀ ⠀⣀⣴⣿⣿⣿                            ║");
+        System.out.println("║                         ⣿⡿⠀⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⠛⠁⣀⡀⠀⠀⢀⣠⣴⣿⣿⣿⣿⣿⣿                            ║");
+        System.out.println("║                         ⣿⡇⠀⣿⣿⣿⣿⣿⣿⣿⡿⠟⠋⢁⣤⡶⠟⠋⣠⣴⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿                           ║");
+        System.out.println("║                         ⣿⣿⡀⢻⣯⡙⠛⠛⠋⠁⣀⣤⠾⠛⢁⣤⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿                           ║");
+        System.out.println("║                         ⣿⣿⣿⣄⡙⠻⠿⣶⠶⠿⠋⣁⣴⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿                           ║");
+        System.out.println("║                         ⣿⣿⣿⣿⣿⣶⣤⣤⣤⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿                           ║");
+        System.out.println("║                         ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿                           ║");
+        System.out.println("║                         ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿                           ║");
         System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════╝");
     }
     public static void vueMenuglobal(){
@@ -175,94 +170,96 @@ public class Vue {
     }
     public static void vueCreationClient() throws SaisieException {
         System.out.println("Création d'un Client");
-        nom = saisieNomPrenom("Le nom ?", "Le nom est incorrect ! merci de ressaisir");
-        prenom = saisieNomPrenom("Le prénom ?", "Le prénom est incorrect ! merci de ressaisir");
-        adresse = saisieAdresse("L'adresse ?", "L'adresse est incorrecte ! merci de ressaisir");
-        codePostal = saisieCodePostal("Code postal ?", "Le code postal est incorrect ! merci de ressaisir");
-        ville = saisieVille("Ville ?", "La ville est incorrecte ! merci de ressaisir");
-        telephone = saisieTelephone("Téléphone ?", "Le n° de téléphone est incorrect ! merci de ressaisir");
-        email = saisieEmail("Le mail ?", "Le Email est incorrect ! merci de ressaisir");
-        nSs = saisieNSS("Le n° de sécurité sociale ?", "Le N° de sécurité sociale est incorrect ! merci de ressaisir");
-        dateNaissance = saisieDateNaissance("La Date de Naissance (JJ/MM/AAAA) ?", "La date de naissance est incorrecte ! merci de ressaisir");
-        mutuelle = saisieNomPrenom("La Mutuelle ?", "Le nom de la mutuelle est incorrect ! merci de ressaisir");
-        medecinRef = saisieNomPrenom("Le Médecin référent ?", "Le nom du médecin est incorrect ! merci de ressaisir");
-        Clients nouveauClient = new Clients(nom, prenom, adresse, codePostal, ville, telephone, email, nSs, dateNaissance, mutuelle, medecinRef);
+        String nom = saisieNomPrenom("Le nom ?", "Le nom est incorrect ! merci de ressaisir");
+        String prenom = saisieNomPrenom("Le prénom ?", "Le prénom est incorrect ! merci de ressaisir");
+        String adresse = saisieAdresse("L'adresse ?", "L'adresse est incorrecte ! merci de ressaisir");
+        String codePostal = saisieCodePostal("Code postal ?", "Le code postal est incorrect ! merci de ressaisir");
+        String ville = saisieVille("Ville ?", "La ville est incorrecte ! merci de ressaisir");
+        String telephone = saisieTelephone("Téléphone ?", "Le n° de téléphone est incorrect ! merci de ressaisir");
+        String email = saisieEmail("Le mail ?", "Le Email est incorrect ! merci de ressaisir");
+        String nSs = saisieNSS("Le n° de sécurité sociale ?", "Le N° de sécurité sociale est incorrect ! merci de ressaisir");
+        String dateNaissance = saisieDateNaissance("La Date de Naissance (JJ/MM/AAAA) ?", "La date de naissance est incorrecte ! merci de ressaisir");
+        String mutuelle = saisieNomPrenom("La Mutuelle ?", "Le nom de la mutuelle est incorrect ! merci de ressaisir");
+        String medecinRef = saisieNomPrenom("Le Médecin référent ?", "Le nom du médecin est incorrect ! merci de ressaisir");
+        Client nouveauClient = new Client(nom, prenom, adresse, codePostal, ville, telephone, email, nSs, dateNaissance, mutuelle, medecinRef);
     }
 
     public static void vueCreationMedecin() throws SaisieException {
         System.out.println("Création d'un médecin");
-        nom = saisieNomPrenom("Le nom ?", "Le nom est incorrect ! merci de ressaisir");
-        prenom = saisieNomPrenom("Le prénom ?", "Le prénom est incorrect ! merci de ressaisir");
-        adresse = saisieAdresse("L'adresse ?", "L'adresse est incorrecte ! merci de ressaisir");
-        codePostal = saisieCodePostal("Le code postal ?", "Le code postal est incorrect ! merci de ressaisir");
-        ville = saisieVille("La ville ?", "La ville est incorrecte ! merci de ressaisir");
-        telephone = saisieTelephone("Le téléphone ?", "Le téléphone est incorrect ! merci de ressaisir");
-        email = saisieEmail("Le mail ?", "Le mail est incorrect ! merci de ressaisir");
-        rPPS = saisieRPPS("Le numéro RPPS ?", "Le numéro RPPS est incorrect ! merci de ressaisir");
-        Medecins nouveauMedecin = new Medecins(nom, prenom, adresse, codePostal, ville, telephone, email, rPPS);
+        String nom = saisieNomPrenom("Le nom ?", "Le nom est incorrect ! merci de ressaisir");
+        String prenom = saisieNomPrenom("Le prénom ?", "Le prénom est incorrect ! merci de ressaisir");
+        String adresse = saisieAdresse("L'adresse ?", "L'adresse est incorrecte ! merci de ressaisir");
+        String codePostal = saisieCodePostal("Le code postal ?", "Le code postal est incorrect ! merci de ressaisir");
+        String ville = saisieVille("La ville ?", "La ville est incorrecte ! merci de ressaisir");
+        String telephone = saisieTelephone("Le téléphone ?", "Le téléphone est incorrect ! merci de ressaisir");
+        String email = saisieEmail("Le mail ?", "Le mail est incorrect ! merci de ressaisir");
+        String rPPS = saisieRPPS("Le numéro RPPS ?", "Le numéro RPPS est incorrect ! merci de ressaisir");
+        Medecin nouveauMedecin = new Medecin(nom, prenom, adresse, codePostal, ville, telephone, email, rPPS);
     }
 
     public static void vueCreationPharmacien() throws SaisieException {
         System.out.println("Création d'un pharmacien");
-        nom = saisieNomPrenom("Le nom ?", "Le nom est incorrect ! merci de ressaisir");
-        prenom = saisieNomPrenom("Le prénom ?", "Le prénom est incorrect ! merci de ressaisir");
-        rPPS = saisieRPPS("Le numéro RPPS ?", "Le numéro RPPS est incorrect ! merci de ressaisir");
-        Pharmaciens nouveauPharmaciens = new Pharmaciens(nom, prenom, rPPS);
+        String nom = saisieNomPrenom("Le nom ?", "Le nom est incorrect ! merci de ressaisir");
+        String prenom = saisieNomPrenom("Le prénom ?", "Le prénom est incorrect ! merci de ressaisir");
+        String rPPS = saisieRPPS("Le numéro RPPS ?", "Le numéro RPPS est incorrect ! merci de ressaisir");
+        Pharmacien nouveauPharmaciens = new Pharmacien(nom, prenom, rPPS);
     }
 
     public static void vueCreationMutuelle() throws SaisieException {
         System.out.println("Création d'une Mutuelle");
-        nom = saisieNomPrenom("Le nom ?", "Le nom est incorrect ! merci de ressaisir");
-        adresse = saisieAdresse("L'adresse ?", "L'adresse est incorrecte ! merci de ressaisir");
-        codePostal = saisieCodePostal("Le code postal ?", "Le code postal est incorrect ! merci de ressaisir");
-        ville = saisieVille("La ville ?", "La ville est incorrecte ! merci de ressaisir");
-        telephone = saisieTelephone("Le téléphone ?", "Le téléphone est incorrect ! merci de ressaisir");
-        email = saisieEmail("Le mail ?", "Le mail est incorrect ! merci de ressaisir");
-        departement = saisieDepartement("Le département ?", "Le département est incorrect ! merci de ressaisir");
-        tdRemboursement = saisieTauxRemboursement("Le taux de remboursement (0-100) ?", "Le taux de remboursement est incorrect ! merci de ressaisir");
-        Mutuelles nouvelleMutuelle = new Mutuelles(nom, adresse, codePostal, ville, telephone, email, departement, tdRemboursement);
+        String nom = saisieNomPrenom("Le nom ?", "Le nom est incorrect ! merci de ressaisir");
+        String adresse = saisieAdresse("L'adresse ?", "L'adresse est incorrecte ! merci de ressaisir");
+        String codePostal = saisieCodePostal("Le code postal ?", "Le code postal est incorrect ! merci de ressaisir");
+        String ville = saisieVille("La ville ?", "La ville est incorrecte ! merci de ressaisir");
+        String telephone = saisieTelephone("Le téléphone ?", "Le téléphone est incorrect ! merci de ressaisir");
+        String email = saisieEmail("Le mail ?", "Le mail est incorrect ! merci de ressaisir");
+        String departement = saisieDepartement("Le département ?", "Le département est incorrect ! merci de ressaisir");
+        int tdRemboursement = saisieTauxRemboursement("Le taux de remboursement (0-100) ?", "Le taux de remboursement est incorrect ! merci de ressaisir");
+        Mutuelle nouvelleMutuelle = new Mutuelle(nom, adresse, codePostal, ville, telephone, email, departement, tdRemboursement);
     }
 
     public static void vueCreationMedicament() throws SaisieException {
         System.out.println("Création d'un médicament");
-        nomMedicament = saisieNomMedicament("Le nom du médicament ?", "Le nom du médicament est incorrect ! merci de ressaisir");
-        categorieMedicament = saisieCategorieMedicament("La catégorie ?", "La catégorie est incorrecte ! merci de ressaisir");
-        prixMedicament = saisiePrix("Le prix ?", "Le prix est incorrect ! merci de ressaisir");
-        dateMiseEnCirculation = saisieDateNaissance("La date de mise en circulation (JJ/MM/AAAA) ?", "La date est incorrecte ! merci de ressaisir");
-        quantiteMedicament = saisieQuantite("La quantité ?", "La quantité est incorrecte ! merci de ressaisir");
-        sansOrdonnanceMedicament = saisieSansOrdonnance("Sans ordonnance (oui/non) ?", "Veuillez répondre par 'oui' ou 'non' !");
-        Medicaments nouveauMedicament = new Medicaments(nomMedicament, categorieMedicament, prixMedicament, dateMiseEnCirculation, quantiteMedicament, sansOrdonnanceMedicament);
+        String nomMedicament = saisieNomMedicament("Le nom du médicament ?", "Le nom du médicament est incorrect ! merci de ressaisir");
+        String categorieMedicament = saisieCategorieMedicament("La catégorie ?", "La catégorie est incorrecte ! merci de ressaisir");
+        double prixMedicament = saisiePrix("Le prix ?", "Le prix est incorrect ! merci de ressaisir");
+        String dateMiseEnCirculation = saisieDateNaissance("La date de mise en circulation (JJ/MM/AAAA) ?", "La date est incorrecte ! merci de ressaisir");
+        int quantiteMedicament = saisieQuantite("La quantité ?", "La quantité est incorrecte ! merci de ressaisir");
+        String sansOrdonnanceMedicament = saisieSansOrdonnance("Sans ordonnance (oui/non) ?", "Veuillez répondre par 'oui' ou 'non' !");
+        Medicament nouveauMedicament = new Medicament(nomMedicament, categorieMedicament, prixMedicament, dateMiseEnCirculation, quantiteMedicament, sansOrdonnanceMedicament);
     }
 
 
     private static String saisieNomPrenom(String message, String messageException) {
-        String saisie = "";
-        boolean erreur = true;
+        String saisie;
+        boolean erreur;
 
         do {
             System.out.println(message);
             saisie = sc.nextLine().trim();
+            erreur = false;
+
             if (!RegexValidator.validerMots(saisie)) {
                 System.err.println(messageException);
-            } else {
-                erreur = false;
+                erreur = true;
             }
+
         } while (erreur);
 
         return saisie;
     }
 
     private static String saisieEmail(String message, String messageException) {
-        String saisie = "";
-        boolean erreur = true;
+        String saisie;
+        boolean erreur ;
 
         do {
             System.out.println(message);
             saisie = sc.nextLine().trim();
+            erreur = false;
             if (!RegexValidator.validerEmail(saisie)) {
                 System.err.println(messageException);
-            } else {
-                erreur = false;
+                erreur = true;
             }
         } while (erreur);
 
@@ -270,16 +267,16 @@ public class Vue {
     }
 
     private static String saisieAdresse(String message, String messageException) {
-        String saisie = "";
-        boolean erreur = true;
+        String saisie;
+        boolean erreur;
 
         do {
             System.out.println(message);
             saisie = sc.nextLine().trim();
+            erreur = false ;
             if (!RegexValidator.validerAdresse(saisie)) {
                 System.err.println(messageException);
-            } else {
-                erreur = false;
+                erreur = true;
             }
         } while (erreur);
 

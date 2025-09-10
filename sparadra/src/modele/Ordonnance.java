@@ -10,7 +10,7 @@ public class Ordonnance implements Serializable {
     private static DateTimeFormatter dtf = DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm:ss");
     private static List<Ordonnance> ordonnance = new ArrayList<Ordonnance>();
 
-    private Medecins medecin;
-    private Clients client;
-    private Medicaments medicament;
+    private Medecin medecin;
+    private Client client;
+    private Medicament medicament;
 }

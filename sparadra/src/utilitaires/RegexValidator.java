@@ -5,24 +5,17 @@ import exception.SaisieException;
 public class RegexValidator {
 
 
-    public static final String REGEX_MOTS = "^(?=.*[A-Za-zÀ-ÿ])[A-Za-zÀ-ÿ\\s\\-]+$";
-//    public static final String REGEX_NSS = "^[12]\\d{2}(0[1-9]|1[0-2]|2[0-9])\\d{8}\\d{2}$";
-//    public static final String REGEX_DATE_NAISSANCE = "^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/\\d{4}$";
-   public static final String REGEX_EMAIL = "^((?!\\.)[\\w\\-_.]*[^.])(@\\w+)(\\.\\w+(\\.\\w+)?[^.\\W])$";
-//    public static final String REGEX_CODE_POSTAL = "\\d{5}";
-//    public static final String REGEX_TELEPHONE = "^(?:\\+33\\s?[1-9](?:\\s?\\d{2}){4}|0[1-9](?:\\s?\\d{2}){4})$";
-//    public static final String REGEX_ADRESSE = "^(n°\\s*)?(\\d{1,4})(\\s*(bis|ter))?\\s+(rue|avenue|av|boulevard|bd|chemin|allée|impasse|route|place)\\s+([\\p{L}0-9'\\- ]+)$";
-//    public static final String REGEX_ADRESSE =  "^\\d{1,4}\\s*(bis|ter)?\\s*(rue|avenue|av|boulevard|bd|chemin|allée|impasse|route|place)\\s+.+$";
-//    public static final String REGEX_VILLE = "^[\\p{L}][\\p{L} \\-']*$";
-//    public static final String REGEX_RPPS = "^10\\d{11}$";
-
-    public static final String REGEX_NSS = "^(?!\\s)(.*\\S)?$";
-    public static final String REGEX_DATE_NAISSANCE = "^(?!\\s)(.*\\S)?$";
-    public static final String REGEX_CODE_POSTAL = "^(?!\\s)(.*\\S)?$";
-    public static final String REGEX_TELEPHONE = "^(?!\\s)(.*\\S)?$";
-    public static final String REGEX_ADRESSE =  "^(?!\\s)(.*\\S)?$";
-    public static final String REGEX_VILLE = "^(?!\\s)(.*\\S)?$";
+    public static final String REGEX_MOTS = "^[A-Za-zÀ-ÿ]+(?:[ \\-][A-Za-zÀ-ÿ]+)*$";
+    public static final String REGEX_NSS = "^[12]\\d{2}(0[1-9]|1[0-2])\\d{5}\\d{2}$";
+    public static final String REGEX_DATE_NAISSANCE = "^(0[1-9]|[12][0-9]|3[01])/(0[1-9]|1[0-2])/\\d{4}$";
+    public static final String REGEX_EMAIL = "^((?!\\.)[\\w\\-_.]*[^.])(@\\w+)(\\.\\w+(\\.\\w+)?[^.\\W])$";
+    public static final String REGEX_CODE_POSTAL = "\\d{5}";
+    public static final String REGEX_TELEPHONE = "^(?:\\+33\\s?[1-9](?:\\s?\\d{2}){4}|0[1-9](?:\\s?\\d{2}){4})$";
+    public static final String REGEX_ADRESSE = "^(n°\\s*)?(\\d{1,4})(\\s*([Bb]is|[Tt]er|[a-gA-G]))?\\s+([Rr]ue|[Aa]venue|[Gg]rand|av|[Bb]oulevard|bd|[Cc]hemin|[Aa]llée?|[Ii]mpasse|[Rr]oute|[Pp]lace|pl)\\s+([\\p{L}][\\p{L}0-9'\\-\\s]*[\\p{L}0-9])$";
+    public static final String REGEX_VILLE = "^[\\p{L}][\\p{L} \\-']*$";
     public static final String REGEX_RPPS = "^10\\d{9}$";
+
+
 
 
     public static boolean validerMots(String nom) {

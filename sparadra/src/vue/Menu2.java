@@ -1,12 +1,10 @@
 package vue;
 
-import controleur.Main;
 import exception.SaisieException;
 import modele.*;
 import utilitaires.PersitSerializable;
 import utilitaires.RegexValidator;
 import utilitaires.Saisie;
-
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -21,10 +19,11 @@ public class Menu2 {
         donnees = PersitSerializable.charger(FICHIER_PERSISTANCE);
         chargerDonnees();
 
-        menuPrincipal();
+
     }
 
     private static void chargerDonnees() {
+
         List<Mutuelle> mutuelle = (List<Mutuelle>) donnees.getOrDefault("mutuelle", new java.util.ArrayList<>());
         List<Medicament> medicament = (List<Medicament>) donnees.getOrDefault("medicament", new java.util.ArrayList<>());
         List<Medecin> medecin = (List<Medecin>) donnees.getOrDefault("medecin", new java.util.ArrayList<>());
@@ -40,7 +39,7 @@ public class Menu2 {
 
 
 
-    private void menuPrincipal() throws SaisieException {
+    public static void menuPrincipal() throws SaisieException {
          boolean fin = false;
             while (!fin) {
                 Vue.vueMenu();
@@ -55,7 +54,7 @@ public class Menu2 {
         }
     }
 
-    private void menuAvecSansOrdonnance() throws SaisieException {
+    private static void menuAvecSansOrdonnance() throws SaisieException {
         boolean fin = false;
             while (!fin) {
                 Vue.vueMenuAvecSansOrdonnance();
@@ -69,7 +68,7 @@ public class Menu2 {
         }
     }
 
-    private void menuAvecOrdonnance() throws SaisieException {
+    private  static void menuAvecOrdonnance() throws SaisieException {
         boolean fin = false;
             while (!fin) {
                 Vue.vueMenuOrdonnance();
@@ -86,7 +85,7 @@ public class Menu2 {
         }
     }
 
-    private  void menuSansOrdonnance() throws SaisieException {
+    private static void menuSansOrdonnance() throws SaisieException {
         boolean fin = false;
             while (!fin) {
                 Vue.vueMenuSansOrdonnance();
@@ -101,7 +100,7 @@ public class Menu2 {
         }
     }
 
-    private void menuGestionPharmacie() throws SaisieException {
+    private static void menuGestionPharmacie() throws SaisieException {
         boolean fin = false;
             while (!fin) {
                 Vue.vueMenuMedicament();
@@ -118,7 +117,7 @@ public class Menu2 {
         }
     }
 
-    private void menuRechercheClient() throws SaisieException {
+    private  static void menuRechercheClient() throws SaisieException {
         boolean fin = false;
         while (!fin) {
             Vue.vueMenuRechercheClients();
@@ -146,7 +145,7 @@ public class Menu2 {
                     System.out.print("N° de sécurité sociale du client : ");
                     String nss = scanner.nextLine();
                     try {
-                        if (RegexValidator.validerMots(nss)) {
+                        if (!RegexValidator.validerMots(nss)) {
                             List<Client> resultats = rechercherClientParNSS(nss);
                             afficherResultatsClients(resultats, "NSS \"" + nss + "\"");
                         } else {
@@ -176,7 +175,7 @@ public class Menu2 {
             }
         }
     }
-    private void menuRechercheMedecin() throws SaisieException {
+    private static void menuRechercheMedecin() throws SaisieException {
         boolean fin = false;
         while (!fin) {
             Vue.vueMenuRechercheMedecin();
@@ -221,7 +220,7 @@ public class Menu2 {
         }
     }
 
-    private void menuRechercheMutuelle() throws SaisieException {
+    private static void menuRechercheMutuelle() throws SaisieException {
         boolean fin = false;
         while (!fin) {
             Vue.vueMenuRechercheMutuelle();
@@ -266,7 +265,7 @@ public class Menu2 {
         }
     }
 
-    private void menuRechercheMedicament() throws SaisieException {
+    private static void menuRechercheMedicament() throws SaisieException {
         boolean fin = false;
         while (!fin) {
             Vue.vueMenuRechercheMedicament();
@@ -482,8 +481,6 @@ public class Menu2 {
             }
         }
     }
-
-
 
     private static boolean quitterEtSauvegarder() {
         System.out.println("Sauvegarde en cours...");

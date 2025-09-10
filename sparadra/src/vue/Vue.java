@@ -10,10 +10,10 @@ import utilitaires.RegexValidator;
 import java.util.Scanner;
 
 public class Vue {
-    private Scanner sc = new Scanner(System.in);
+    private static Scanner sc = new Scanner(System.in);
 
 
-    public void vueMenu() {
+    public static void vueMenu() {
 
         System.out.println("╔══════════════════════════════════════════════════════════════════════════════════════════╗");
         System.out.println("║                                                                                          ║");
@@ -22,24 +22,24 @@ public class Vue {
         System.out.println("║                                   Application Sparadra                                   ║");
         System.out.println("║                                                                                          ║");
         System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════╣");
-        System.out.println("║                         ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿                            ║");
-        System.out.println("║                         ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿                            ║");
-        System.out.println("║                         ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⠋⣉⣤⣤⣤⣉⠛⢿⣿⣿⣿                            ║");
-        System.out.println("║                         ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠟⠋⣠⣴⡾⠟⠋⠉⠉⠉⠓⠀⠹⣿⣿                            ║");
-        System.out.println("║                         ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⠛⢁⣠⣶⡿⠟⠉⠀⠀  ⠀⠀⠀⠀⠀⠀⠀⢻⣿                            ║");
-        System.out.println("║                         ⣿⣿⣿⣿⣿⣿⣿⡿⠟⢋⣠⣴⣾⣿⣿⣅⠀⠀⠀⠀⠀⠀⠀⠀   ⠀⠀⠀⠀⣸⣿                            ║");
-        System.out.println("║                         ⣿⣿⣿⣿⡿⠋⣁⣤⣶⣿⣿⣿⣿⣿⣿⣿⣷⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀  ⣠⣿⣿                            ║");
-        System.out.println("║                         ⣿⣿⡿⢁⣴⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡷⠀⠀⠀⠀⠀⠀ ⠀⣀⣴⣿⣿⣿                             ║");
-        System.out.println("║                         ⣿⡿⠀⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⠛⠁⣀⡀⠀⠀⢀⣠⣴⣿⣿⣿⣿⣿⣿                             ║");
-        System.out.println("║                         ⣿⡇⠀⣿⣿⣿⣿⣿⣿⣿⡿⠟⠋⢁⣤⡶⠟⠋⣠⣴⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿                            ║");
-        System.out.println("║                         ⣿⣿⡀⢻⣯⡙⠛⠛⠋⠁⣀⣤⠾⠛⢁⣤⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿                            ║");
-        System.out.println("║                         ⣿⣿⣿⣄⡙⠻⠿⣶⠶⠿⠋⣁⣴⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿                            ║");
-        System.out.println("║                         ⣿⣿⣿⣿⣿⣶⣤⣤⣤⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿                            ║");
-        System.out.println("║                         ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿                            ║");
-        System.out.println("║                         ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿                            ║");
+        System.out.println("║                         ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿                           ║");
+        System.out.println("║                         ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿                           ║");
+        System.out.println("║                         ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⠋⣉⣤⣤⣤⣉⠛⢿⣿⣿⣿                           ║");
+        System.out.println("║                         ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡿⠟⠋⣠⣴⡾⠟⠋⠉⠉⠉⠓⠀⠹⣿⣿                           ║");
+        System.out.println("║                         ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⠛⢁⣠⣶⡿⠟⠉⠀⠀  ⠀⠀⠀⠀⠀⠀⠀⢻⣿                           ║");
+        System.out.println("║                         ⣿⣿⣿⣿⣿⣿⣿⡿⠟⢋⣠⣴⣾⣿⣿⣅⠀⠀⠀⠀⠀⠀⠀⠀   ⠀⠀⠀⠀⣸⣿                           ║");
+        System.out.println("║                         ⣿⣿⣿⣿⡿⠋⣁⣤⣶⣿⣿⣿⣿⣿⣿⣿⣷⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀  ⣠⣿⣿                           ║");
+        System.out.println("║                         ⣿⣿⡿⢁⣴⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⡷⠀⠀⠀⠀⠀⠀ ⠀⣀⣴⣿⣿⣿                            ║");
+        System.out.println("║                         ⣿⡿⠀⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⠿⠛⠁⣀⡀⠀⠀⢀⣠⣴⣿⣿⣿⣿⣿⣿                            ║");
+        System.out.println("║                         ⣿⡇⠀⣿⣿⣿⣿⣿⣿⣿⡿⠟⠋⢁⣤⡶⠟⠋⣠⣴⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿                           ║");
+        System.out.println("║                         ⣿⣿⡀⢻⣯⡙⠛⠛⠋⠁⣀⣤⠾⠛⢁⣤⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿                           ║");
+        System.out.println("║                         ⣿⣿⣿⣄⡙⠻⠿⣶⠶⠿⠋⣁⣴⣾⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿                           ║");
+        System.out.println("║                         ⣿⣿⣿⣿⣿⣶⣤⣤⣤⣶⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿                           ║");
+        System.out.println("║                         ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿                           ║");
+        System.out.println("║                         ⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿⣿                           ║");
         System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════╝");
     }
-    public void vueMenuglobal(){
+    public static void vueMenuglobal(){
         System.out.println("╔══════════════════════════════════════════════════════════════════════════════════════════╗");
         System.out.println("║         Menu Principal                                                                   ║");
         System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════╣");
@@ -50,7 +50,7 @@ public class Vue {
         System.out.println("║ 0 : Quitter l'Application                                                                ║");
         System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════╝");
     }
-    public void vueMenuAvecSansOrdonnance(){
+    public static void vueMenuAvecSansOrdonnance(){
         System.out.println("╔══════════════════════════════════════════════════════════════════════════════════════════╗");
         System.out.println("║         Choix du type de vente                                                           ║");
         System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════╣");
@@ -61,7 +61,7 @@ public class Vue {
         System.out.println("║ 0 : Retour au Menu Principal                                                             ║");
         System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════╝");
     }
-    public void vueMenuOrdonnance() {
+    public static void vueMenuOrdonnance() {
         System.out.println("╔══════════════════════════════════════════════════════════════════════════════════════════╗");
         System.out.println("║         Avec Ordonnance                                                                  ║");
         System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════╣");
@@ -78,7 +78,7 @@ public class Vue {
         System.out.println("║ 0 : Retour au Menu Précedent                                                             ║");
         System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════╝");
     }
-    public void vueMenuSansOrdonnance() {
+    public static void vueMenuSansOrdonnance() {
 
         System.out.println("╔══════════════════════════════════════════════════════════════════════════════════════════╗");
         System.out.println("║         Sans Ordonnance                                                                  ║");
@@ -92,7 +92,7 @@ public class Vue {
         System.out.println("║ 0 : Retour au Menu Précedent                                                             ║");
         System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════╝");
     }
-    public void vueMenuMedicament() {
+    public static void vueMenuMedicament() {
 
         System.out.println("╔══════════════════════════════════════════════════════════════════════════════════════════╗");
         System.out.println("║         Gestion Pharmacie                                                                ║");
@@ -110,7 +110,7 @@ public class Vue {
         System.out.println("║ 0 : Retour au Menu Précedent                                                             ║");
         System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════╝");
         }
-    public void vueMenuRechercheClients(){
+    public static void vueMenuRechercheClients(){
         System.out.println("╔══════════════════════════════════════════════════════════════════════════════════════════╗");
         System.out.println("║         Recherche de Client                                                              ║");
         System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════╣");
@@ -123,7 +123,7 @@ public class Vue {
         System.out.println("║ 0 : Retour                                                                               ║");
         System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════╝");
     }
-    public void vueMenuRechercheMedecin(){
+    public static void vueMenuRechercheMedecin(){
         System.out.println("╔══════════════════════════════════════════════════════════════════════════════════════════╗");
         System.out.println("║         Recherche de Médecin                                                             ║");
         System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════╣");
@@ -136,7 +136,7 @@ public class Vue {
         System.out.println("║ 0 : Retour                                                                               ║");
         System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════╝");
     }
-    public void vueMenuRechercheMutuelle(){
+    public static void vueMenuRechercheMutuelle(){
         System.out.println("╔══════════════════════════════════════════════════════════════════════════════════════════╗");
         System.out.println("║         Recherche de Mutuelle                                                            ║");
         System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════╣");
@@ -149,7 +149,7 @@ public class Vue {
         System.out.println("║ 0 : Retour                                                                               ║");
         System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════╝");
     }
-    public void vueMenuRechercheMedicament(){
+    public static void vueMenuRechercheMedicament(){
         System.out.println("╔══════════════════════════════════════════════════════════════════════════════════════════╗");
         System.out.println("║         Recherche de Médicament                                                          ║");
         System.out.println("╠══════════════════════════════════════════════════════════════════════════════════════════╣");
@@ -162,13 +162,13 @@ public class Vue {
         System.out.println("║ 0 : Retour                                                                               ║");
         System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════╝");
     }
-    public void afficherListeVentes() {
+    public static void afficherListeVentes() {
         System.out.println("╔══════════════════════════════════════════════════════════════════════════════════════════╗");
         System.out.println("║                                     Liste des ventes                                     ║");
         System.out.println("╚══════════════════════════════════════════════════════════════════════════════════════════╝");
         System.out.println("Fonctionnalité à implémenter...");
     }
-    public void vueCreationClient() throws SaisieException {
+    public static void vueCreationClient() throws SaisieException {
         System.out.println("Création d'un Client");
         String nom = saisieNomPrenom("Le nom ?", "Le nom est incorrect ! merci de ressaisir");
         String prenom = saisieNomPrenom("Le prénom ?", "Le prénom est incorrect ! merci de ressaisir");
@@ -184,7 +184,7 @@ public class Vue {
         Client nouveauClient = new Client(nom, prenom, adresse, codePostal, ville, telephone, email, nSs, dateNaissance, mutuelle, medecinRef);
     }
 
-    public void vueCreationMedecin() throws SaisieException {
+    public static void vueCreationMedecin() throws SaisieException {
         System.out.println("Création d'un médecin");
         String nom = saisieNomPrenom("Le nom ?", "Le nom est incorrect ! merci de ressaisir");
         String prenom = saisieNomPrenom("Le prénom ?", "Le prénom est incorrect ! merci de ressaisir");
@@ -197,7 +197,7 @@ public class Vue {
         Medecin nouveauMedecin = new Medecin(nom, prenom, adresse, codePostal, ville, telephone, email, rPPS);
     }
 
-    public void vueCreationPharmacien() throws SaisieException {
+    public static void vueCreationPharmacien() throws SaisieException {
         System.out.println("Création d'un pharmacien");
         String nom = saisieNomPrenom("Le nom ?", "Le nom est incorrect ! merci de ressaisir");
         String prenom = saisieNomPrenom("Le prénom ?", "Le prénom est incorrect ! merci de ressaisir");
@@ -205,7 +205,7 @@ public class Vue {
         Pharmacien nouveauPharmaciens = new Pharmacien(nom, prenom, rPPS);
     }
 
-    public void vueCreationMutuelle() throws SaisieException {
+    public static void vueCreationMutuelle() throws SaisieException {
         System.out.println("Création d'une Mutuelle");
         String nom = saisieNomPrenom("Le nom ?", "Le nom est incorrect ! merci de ressaisir");
         String adresse = saisieAdresse("L'adresse ?", "L'adresse est incorrecte ! merci de ressaisir");
@@ -218,7 +218,7 @@ public class Vue {
         Mutuelle nouvelleMutuelle = new Mutuelle(nom, adresse, codePostal, ville, telephone, email, departement, tdRemboursement);
     }
 
-    public void vueCreationMedicament() throws SaisieException {
+    public static void vueCreationMedicament() throws SaisieException {
         System.out.println("Création d'un médicament");
         String nomMedicament = saisieNomMedicament("Le nom du médicament ?", "Le nom du médicament est incorrect ! merci de ressaisir");
         String categorieMedicament = saisieCategorieMedicament("La catégorie ?", "La catégorie est incorrecte ! merci de ressaisir");
@@ -230,7 +230,7 @@ public class Vue {
     }
 
 
-    private String saisieNomPrenom(String message, String messageException) {
+    private static String saisieNomPrenom(String message, String messageException) {
         String saisie;
         boolean erreur;
 
@@ -249,7 +249,7 @@ public class Vue {
         return saisie;
     }
 
-    private String saisieEmail(String message, String messageException) {
+    private static String saisieEmail(String message, String messageException) {
         String saisie;
         boolean erreur ;
 
@@ -266,7 +266,7 @@ public class Vue {
         return saisie;
     }
 
-    private String saisieAdresse(String message, String messageException) {
+    private static String saisieAdresse(String message, String messageException) {
         String saisie;
         boolean erreur;
 
@@ -283,7 +283,7 @@ public class Vue {
         return saisie;
     }
 
-    private String saisieCodePostal(String message, String messageException) {
+    private static String saisieCodePostal(String message, String messageException) {
         String saisie = "";
         boolean erreur = true;
 
@@ -300,7 +300,7 @@ public class Vue {
         return saisie;
     }
 
-    private String saisieVille(String message, String messageException) {
+    private static String saisieVille(String message, String messageException) {
         String saisie = "";
         boolean erreur = true;
 
@@ -317,7 +317,7 @@ public class Vue {
         return saisie;
     }
 
-    private String saisieTelephone(String message, String messageException) {
+    private static String saisieTelephone(String message, String messageException) {
         String saisie = "";
         boolean erreur = true;
 
@@ -334,7 +334,7 @@ public class Vue {
         return saisie;
     }
 
-    private String saisieNSS(String message, String messageException) {
+    private static String saisieNSS(String message, String messageException) {
         String saisie = "";
         boolean erreur = true;
 
@@ -351,7 +351,7 @@ public class Vue {
         return saisie;
     }
 
-    private String saisieDateNaissance(String message, String messageException) {
+    private static String saisieDateNaissance(String message, String messageException) {
         String saisie = "";
         boolean erreur = true;
 
@@ -368,7 +368,7 @@ public class Vue {
         return saisie;
     }
 
-    private String saisieRPPS(String message, String messageException) {
+    private static String saisieRPPS(String message, String messageException) {
         String saisie = "";
         boolean erreur = true;
 
@@ -385,7 +385,7 @@ public class Vue {
         return saisie;
     }
 
-    private String saisieDepartement(String message, String messageException) {
+    private static String saisieDepartement(String message, String messageException) {
         String saisie = "";
         boolean erreur = true;
 
@@ -402,7 +402,7 @@ public class Vue {
         return saisie;
     }
 
-    private String saisieNomMedicament(String message, String messageException) {
+    private static String saisieNomMedicament(String message, String messageException) {
         String saisie = "";
         boolean erreur = true;
 
@@ -419,7 +419,7 @@ public class Vue {
         return saisie;
     }
 
-    private String saisieCategorieMedicament(String message, String messageException) {
+    private static String saisieCategorieMedicament(String message, String messageException) {
         String saisie = "";
         boolean erreur = true;
 
@@ -436,7 +436,7 @@ public class Vue {
         return saisie;
     }
 
-    private String saisieSansOrdonnance(String message, String messageException) {
+    private static String saisieSansOrdonnance(String message, String messageException) {
         String saisie = "";
         boolean erreur = true;
 
@@ -453,7 +453,7 @@ public class Vue {
         return saisie;
     }
 
-    private int saisieTauxRemboursement(String message, String messageException) {
+    private static int saisieTauxRemboursement(String message, String messageException) {
         int valeur = 0;
         boolean erreur = true;
 
@@ -476,7 +476,7 @@ public class Vue {
         return valeur;
     }
 
-    private int saisieQuantite(String message, String messageException) {
+    private static int saisieQuantite(String message, String messageException) {
         int valeur = 0;
         boolean erreur = true;
 
@@ -499,7 +499,7 @@ public class Vue {
         return valeur;
     }
 
-    private double saisiePrix(String message, String messageException) {
+    private static double saisiePrix(String message, String messageException) {
         double valeur = 0.0;
         boolean erreur = true;
 

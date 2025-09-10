@@ -29,8 +29,8 @@ public class Pharmacien implements Serializable {
     }
 
     public void setNom(String nom) throws SaisieException {
-        if (RegexValidator.validerMots(nom)) {
-            throw new SaisieException("Erreur dans le nom ! Merci de corriger");
+        if (!RegexValidator.validerMots(nom)) {
+            throw new SaisieException("Erreur dans le nom ! Pharmacien Merci de corriger"+nom);
         }
         this.nom = nom;
     }
@@ -40,8 +40,8 @@ public class Pharmacien implements Serializable {
     }
 
     public void setPrenom(String prenom) throws SaisieException {
-        if (RegexValidator.validerMots(prenom)) {
-            throw new SaisieException("Erreur dans le prénom ! Merci de corriger");
+        if (!RegexValidator.validerMots(prenom)) {
+            throw new SaisieException("Erreur dans le prénom !  Merci de corriger"+prenom);
         }
         this.prenom = prenom;
     }
@@ -51,8 +51,8 @@ public class Pharmacien implements Serializable {
     }
 
     public void setRPPS(String rPPS) throws SaisieException {
-        if (RegexValidator.validerRPPS(rPPS)) {
-            throw new SaisieException("RPPS non valide ! Merci de saisir 11 chiffres commencent par 10 ");
+        if (!RegexValidator.validerRPPS(rPPS)) {
+            throw new SaisieException("RPPS non valide  Pharmacien ! Merci de saisir 11 chiffres commencent par 10 "+rPPS);
         } else {
             this.rPPS = rPPS;
         }

@@ -33,7 +33,7 @@ public class Medicament implements Serializable {
     }
 
     public void setNomMedicament(String nomMedicament) throws SaisieException {
-        if (RegexValidator.validerNomMedicament(nomMedicament)) {
+        if (!RegexValidator.validerNomMedicament(nomMedicament)) {
             throw new SaisieException("Nom du medicament incorrecte !");
         }
         this.nomMedicament = nomMedicament;
@@ -44,7 +44,7 @@ public class Medicament implements Serializable {
     }
 
     public void setCategorieMedicament(String categorieMedicament) throws SaisieException {
-        if (RegexValidator.validerCategorieMedicament(categorieMedicament)) {
+        if (!RegexValidator.validerCategorieMedicament(categorieMedicament)) {
             throw new SaisieException("Catégorie incorrecte !");
         }
         this.categorieMedicament = categorieMedicament;
@@ -55,7 +55,7 @@ public class Medicament implements Serializable {
     }
 
     public void setPrixMedicament(double prixMedicament) throws SaisieException {
-        if (RegexValidator.validerPrix(prixMedicament)) {
+        if (!RegexValidator.validerPrix(prixMedicament)) {
             throw new SaisieException("Prix ne peut pas être négatif !");
         }
         this.prixMedicament = prixMedicament;
@@ -73,14 +73,14 @@ public class Medicament implements Serializable {
         }
     }
     public void setQuantiteMedicament(int quantiteMedicament) throws SaisieException {
-        if (RegexValidator.validerQuantite(quantiteMedicament)) {
+        if (!RegexValidator.validerQuantite(quantiteMedicament)) {
             throw new SaisieException("Quantité ne peut pas être négatif !");
         }
         this.quantiteMedicament = quantiteMedicament;
     }
 
     public void setSansOrdonnanceMedicament(String sansOrdonnanceMedicament) {
-        if (RegexValidator.validerSansOrdonnance(sansOrdonnanceMedicament)) {
+        if (!RegexValidator.validerSansOrdonnance(sansOrdonnanceMedicament)) {
             this.sansOrdonnanceMedicament = sansOrdonnanceMedicament.toLowerCase();
         } else {
             this.sansOrdonnanceMedicament = sansOrdonnanceMedicament;

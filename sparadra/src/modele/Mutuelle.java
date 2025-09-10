@@ -36,15 +36,15 @@ public class Mutuelle implements Serializable {
     }
 
     public void setNom(String nom) throws SaisieException {
-        if (RegexValidator.validerMots(nom)) {
-            throw new SaisieException("Erreur dans le nom ! Merci de corriger");
+        if (!RegexValidator.validerMots(nom)) {
+            throw new SaisieException("Erreur dans le nom Mutuelle ! Merci de corriger"+nom);
         }
         this.nom = nom;
     }
 
     public void setAdresse(String adresse) throws SaisieException {
-        if (RegexValidator.validerAdresse(adresse)) {
-            throw new SaisieException("Erreur dans l'adresse ! Merci de corriger");
+        if (!RegexValidator.validerAdresse(adresse)) {
+            throw new SaisieException("Erreur dans l'adresse  Mutuelle ! Merci de corriger"+adresse);
         }
         this.adresse = adresse;
     }
@@ -54,8 +54,8 @@ public class Mutuelle implements Serializable {
     }
 
     public void setCodePostal(String codePostal) throws SaisieException {
-        if (RegexValidator.validerCodePostal(codePostal)) {
-            throw new SaisieException("Erreur dans le code postal ! Merci de corriger");
+        if (!RegexValidator.validerCodePostal(codePostal)) {
+            throw new SaisieException("Erreur dans le code postal Mutuelle ! Merci de corriger"+codePostal);
         }
         this.codePostal = codePostal;
     }
@@ -65,8 +65,8 @@ public class Mutuelle implements Serializable {
     }
 
     public void setVille(String ville) throws SaisieException {
-        if (RegexValidator.validerVille(ville)) {
-            throw new SaisieException("Erreur dans la ville ! Merci de corriger");
+        if (!RegexValidator.validerVille(ville)) {
+            throw new SaisieException("Erreur dans la ville Mutuelle ! Merci de corriger"+ville);
         }
         this.ville = ville;
     }
@@ -76,8 +76,8 @@ public class Mutuelle implements Serializable {
     }
 
     public void setTelephone(String telephone) throws SaisieException {
-        if (RegexValidator.validerTelephone(telephone)) {
-            throw new SaisieException("Erreur le N° de telephone est incorrecte ! Merci de corriger");
+        if (!RegexValidator.validerTelephone(telephone)) {
+            throw new SaisieException("Erreur le N° de telephone est incorrecte  Mutuelle  ! Merci de corriger"+telephone);
         }
         this.telephone = telephone;
     }
@@ -87,8 +87,8 @@ public class Mutuelle implements Serializable {
     }
 
     public void setEmail(String email) throws SaisieException {
-        if (RegexValidator.validerEmail(email)) {
-            throw new SaisieException("Erreur Mail est incorrecte ! Merci de corriger");
+        if (!RegexValidator.validerEmail(email)) {
+            throw new SaisieException("Erreur Mail est incorrecte  Mutuelle  ! Merci de corriger"+email);
         }
         this.email = email;
     }
@@ -98,8 +98,8 @@ public class Mutuelle implements Serializable {
     }
 
     public void setDepartement(String departement) throws SaisieException {
-        if (RegexValidator.validerVille(departement)) {
-            throw new SaisieException("Département inconnu");
+        if (!RegexValidator.validerVille(departement)) {
+            throw new SaisieException("Département inconnu  Mutuelle "+departement);
         }
         this.departement = departement;
     }
@@ -109,8 +109,8 @@ public class Mutuelle implements Serializable {
     }
 
     public void setTRemboursement(int tRemboursement) throws SaisieException {
-        if (RegexValidator.validerTauxRemboursement(tRemboursement)) {
-            throw new SaisieException("Taux de remboursement invalide ! Doit être entre 0 et 100.");
+        if (!RegexValidator.validerTauxRemboursement(tRemboursement)) {
+            throw new SaisieException("Taux de remboursement invalide ! Doit être entre 0 et 100."+tRemboursement);
         }
         this.tRemboursement = tRemboursement;
     }

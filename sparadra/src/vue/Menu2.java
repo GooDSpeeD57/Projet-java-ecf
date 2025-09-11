@@ -11,6 +11,7 @@ import java.util.Map;
 import java.util.Scanner;
 
 public class Menu2 {
+    private static final Scanner scanner = new Scanner(System.in);
     private static final String FICHIER_PERSISTANCE = "donnees.bin";
     private static Map<String, Object> donnees;
 
@@ -125,7 +126,6 @@ public class Menu2 {
             switch (choix) {
                 case 0 -> fin = true;
                 case 1 -> {
-                    Scanner scanner = new Scanner(System.in);
                     System.out.print("Nom du client à rechercher : \n");
                     String nom = scanner.nextLine();
                     try {
@@ -141,7 +141,6 @@ public class Menu2 {
                     }
                 }
                 case 2 -> {
-                    Scanner scanner = new Scanner(System.in);
                     System.out.print("N° de sécurité sociale du client : ");
                     String nss = scanner.nextLine();
                     try {
@@ -157,7 +156,6 @@ public class Menu2 {
                     }
                 }
                 case 3 -> {
-                    Scanner scanner = new Scanner(System.in);
                     System.out.print("Email du client à rechercher : ");
                     String email = scanner.nextLine();
                     try {
@@ -183,7 +181,6 @@ public class Menu2 {
             switch (choix) {
                 case 0 -> fin = true;
                 case 1 -> {
-                    Scanner scanner = new Scanner(System.in);
                     System.out.print("Nom du médecin à rechercher : ");
                     String nom = scanner.nextLine();
                     try {
@@ -199,7 +196,6 @@ public class Menu2 {
                     }
                 }
                 case 2 -> {
-                    Scanner scanner = new Scanner(System.in);
                     System.out.print("N° RPPS du médecin : ");
                     String rpps = scanner.nextLine();
                     try {
@@ -228,7 +224,6 @@ public class Menu2 {
             switch (choix) {
                 case 0 -> fin = true;
                 case 1 -> {
-                    Scanner scanner = new Scanner(System.in);
                     System.out.print("Nom de la mutuelle à rechercher : ");
                     String nom = scanner.nextLine();
                     try {
@@ -244,7 +239,6 @@ public class Menu2 {
                     }
                 }
                 case 2 -> {
-                    Scanner scanner = new Scanner(System.in);
                     System.out.print("Département de la mutuelle : ");
                     String departement = scanner.nextLine();
                     try {
@@ -273,7 +267,6 @@ public class Menu2 {
             switch (choix) {
                 case 0 -> fin = true;
                 case 1 -> {
-                    Scanner scanner = new Scanner(System.in);
                     System.out.print("Nom du médicament à rechercher : ");
                     String nom = scanner.nextLine();
                     try {
@@ -289,7 +282,6 @@ public class Menu2 {
                     }
                 }
                 case 2 -> {
-                    Scanner scanner = new Scanner(System.in);
                     System.out.print("Catégorie du médicament : ");
                     String categorie = scanner.nextLine();
                     try {

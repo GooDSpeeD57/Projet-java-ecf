@@ -21,11 +21,6 @@ public class RegexValidator {
     public static boolean validerMots(String nom) {
         return nom != null && !nom.trim().isEmpty() && nom.matches(REGEX_MOTS);
     }
-//    public static void validerMots(String nom) throws SaisieException {
-//        if (nom == null || nom.trim().isEmpty() || !nom.matches(REGEX_MOTS)) {
-//            throw new SaisieException("Chaine invalide : doit contenir uniquement des lettres.");
-//        }
-//    }
 
     public static boolean validerNSS(String nss) {
        return nss != null && nss.matches(REGEX_NSS);

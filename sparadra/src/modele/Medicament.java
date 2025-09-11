@@ -72,11 +72,19 @@ public class Medicament implements Serializable {
             this.dateMiseEnCirculation = dateMiseEnCirculation;
         }
     }
+    public int getQuantiteMedicament() {
+        return quantiteMedicament;
+    }
+
     public void setQuantiteMedicament(int quantiteMedicament) throws SaisieException {
         if (!RegexValidator.validerQuantite(quantiteMedicament)) {
             throw new SaisieException("Quantité ne peut pas être négatif !");
         }
         this.quantiteMedicament = quantiteMedicament;
+    }
+
+    public String getSansOrdonnanceMedicament(){
+        return sansOrdonnanceMedicament;
     }
 
     public void setSansOrdonnanceMedicament(String sansOrdonnanceMedicament) {
@@ -95,13 +103,20 @@ public class Medicament implements Serializable {
         Medicament.medicament = medicament;
     }
 
+    public void retirerDuStock(int quantite) {
+        if (quantite <= quantiteMedicament) {
+            this.quantiteMedicament -= quantite;
+        } else {
+            System.out.println("Stock insuffisant pour le médicament : " + nomMedicament);
+        }
+    }
     public String toString(){
         return "Nom du medicament : "+this.nomMedicament+
                 "\nCatégorie du medicament : "+this.categorieMedicament+
                 "\nPrix du medicament : "+this.prixMedicament+
                 "\nDate de mise sur le marché : "+this.dateMiseEnCirculation+
                 "\nQuantité du medicament : "+this.quantiteMedicament+
-                "\nDisponible sans ordonnance"+this.sansOrdonnanceMedicament;
+                "\nDisponible sans ordonnance : "+this.sansOrdonnanceMedicament;
     }
 }
 

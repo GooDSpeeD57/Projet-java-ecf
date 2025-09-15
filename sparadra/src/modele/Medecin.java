@@ -37,6 +37,38 @@ public class Medecin extends Personne {
         Medecin.medecin = medecin;
     }
 
+    public static List<Medecin> rechercherParNom(String nom) {
+        List<Medecin> resultats = new ArrayList<>();
+        for (Medecin m : medecin) {
+            if (m.getNom() != null && m.getNom().equalsIgnoreCase(nom.trim())) {
+                resultats.add(m);
+            }
+        }
+        return resultats;
+    }
+
+    public static List<Medecin> rechercherParRpps(String Rpps) {
+        List <Medecin> resultats = new ArrayList<>();
+        for (Medecin m : medecin) {
+            if (m.getRPPS() != null && m.getRPPS().equals(Rpps.trim())) {
+                resultats.add(m);
+            }
+        }
+        return resultats;
+    }
+
+    public static List<Medecin> rechercherParEmail(String email) {
+        List<Medecin> resultats = new ArrayList<>();
+        for (Medecin m : medecin) {
+            if (m.getEmail() != null && m.getEmail().equalsIgnoreCase(email.trim())) {
+                resultats.add(m);
+            }
+        }
+        return resultats;
+    }
+
+
+
     public String toString() {
         return super.toString()+"\nN° RPPS: "+this.rPPS;
     }

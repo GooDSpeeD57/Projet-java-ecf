@@ -74,6 +74,37 @@ public class Client extends Personne {
         Client.client = client;
     }
 
+    public static List<Client> rechercherClientParNom(String nom) {
+        List<Client> resultats = new ArrayList<>();
+        for (Client c : client) {
+            if (c.getNom() != null && c.getNom().equalsIgnoreCase(nom.trim())) {
+                resultats.add(c);
+            }
+        }
+        return resultats;
+    }
+
+    public static List<Client> rechercherClientParNss(String nSs) {
+        List<Client> resultats = new ArrayList<>();
+        for (Client c : client) {
+            if (c.getNSs() != null && c.getNSs().equals(nSs.trim())) {
+                resultats.add(c);
+            }
+        }
+        return resultats;
+    }
+
+    public static List<Client> rechercherClientParEmail(String email) {
+        List<Client> resultats = new ArrayList<>();
+        for (Client c : client) {
+            if (c.getEmail() != null && c.getEmail().equalsIgnoreCase(email.trim())) {
+                resultats.add(c);
+            }
+        }
+        return resultats;
+    }
+
+
     public String toString(){
         return super.toString()+
                 "\n Numéron de Sécurité Social "+this.nSs+

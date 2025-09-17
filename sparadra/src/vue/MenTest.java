@@ -112,7 +112,7 @@ public class MenTest {
     }
         public static List<Client> rechercherClientParNom(String nom) {
         List<Client> resultats = new ArrayList<>();
-        for (Client client : Client.getClient()) {
+        for (Client client : Client.getClients()) {
             if (client.getNom().toLowerCase().contains(nom.toLowerCase())) {
                 resultats.add(client);
             }
@@ -123,8 +123,8 @@ public class MenTest {
 
     public static List<Client> rechercherClientParNSS(String nSs) {
         List<Client> resultats = new ArrayList<>();
-        for (Client client : Client.getClient()) {
-            if (client.getNSs().toLowerCase().contains(nSs.toLowerCase())) {
+        for (Client client : Client.getClients()) {
+            if (client.getNss().toLowerCase().contains(nSs.toLowerCase())) {
                 resultats.add(client);
             }
         }
@@ -133,7 +133,7 @@ public class MenTest {
 
     public static List<Client> rechercherClientParEmail(String email) {
         List<Client> resultats = new ArrayList<>();
-        for (Client client : Client.getClient()) {
+        for (Client client : Client.getClients()) {
             if (client.getEmail().toLowerCase().contains(email.toLowerCase())) {
                 resultats.add(client);
             }

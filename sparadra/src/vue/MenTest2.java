@@ -84,7 +84,7 @@ public class MenTest2 {
     }
     public static List<Client> rechercherClientParNom(String nom) {
         List<Client> resultats = new ArrayList<>();
-        for (Client client : Client.getClient()) {
+        for (Client client : Client.getClients()) {
             if (client.getNom().toLowerCase().contains(nom.toLowerCase())) {
                 resultats.add(client);
             }

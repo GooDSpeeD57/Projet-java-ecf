@@ -61,7 +61,7 @@ public class MainSwing3 extends JFrame {
         List<Pharmacien> pharmacien = (List<Pharmacien>) donnees.getOrDefault("pharmacien", new java.util.ArrayList<>());
         List<Client> client = (List<Client>) donnees.getOrDefault("client", new java.util.ArrayList<>());
 
-        Client.setClient(client);
+        Client.setClients(client);
         Mutuelle.setMutuelle(mutuelle);
         Medicament.setMedicament(medicament);
         Medecin.setMedecin(medecin);
@@ -167,7 +167,7 @@ public class MainSwing3 extends JFrame {
         panelStats.setBorder(new TitledBorder("Statistiques"));
         panelStats.setBackground(new Color(240, 248, 255));
 
-        JLabel lblNbClient = new JLabel("Clients : " + Client.getClient().size(), SwingConstants.CENTER);
+        JLabel lblNbClient = new JLabel("Clients : " + Client.getClients().size(), SwingConstants.CENTER);
         JLabel lblNbMedicament = new JLabel("Médicaments : " + Medicament.getMedicament().size(), SwingConstants.CENTER);
         JLabel lblNbMedecin = new JLabel("Médecins : " + Medecin.getMedecin().size(), SwingConstants.CENTER);
         JLabel lblNbMutuelle = new JLabel("Mutuelles : " + Mutuelle.getMutuelle().size(), SwingConstants.CENTER);
@@ -778,7 +778,7 @@ public class MainSwing3 extends JFrame {
 
     private void chargerClient() {
         modelClient.setRowCount(0);
-        for (Client client : Client.getClient()) {
+        for (Client client : Client.getClients()) {
             modelClient.addRow(new Object[]{
                     client.getNom(),
                     client.getPrenom(),
@@ -787,7 +787,7 @@ public class MainSwing3 extends JFrame {
                     client.getVille(),
                     client.getTelephone(),
                     client.getEmail(),
-                    client.getNSs(),
+                    client.getNss(),
                     client.getDateNaissance(),
                     client.getMutuelle(),
                     client.getMedecinRef()
@@ -1041,7 +1041,7 @@ public class MainSwing3 extends JFrame {
         for (Client c : resultats) {
             modelClient.addRow(new Object[]{
                     c.getNom(), c.getPrenom(), c.getAdresse(), c.getCodePostal(),
-                    c.getVille(), c.getTelephone(), c.getEmail(), c.getNSs(),
+                    c.getVille(), c.getTelephone(), c.getEmail(), c.getNss(),
                     c.getDateNaissance(), c.getMutuelle(), c.getMedecinRef()
             });
         }
@@ -1059,7 +1059,7 @@ public class MainSwing3 extends JFrame {
         for (Client c : resultats) {
             modelClient.addRow(new Object[]{
                     c.getNom(), c.getPrenom(), c.getAdresse(), c.getCodePostal(),
-                    c.getVille(), c.getTelephone(), c.getEmail(), c.getNSs(),
+                    c.getVille(), c.getTelephone(), c.getEmail(), c.getNss(),
                     c.getDateNaissance(), c.getMutuelle(), c.getMedecinRef()
             });
         }
@@ -1077,7 +1077,7 @@ public class MainSwing3 extends JFrame {
         for (Client c : resultats) {
             modelClient.addRow(new Object[]{
                     c.getNom(), c.getPrenom(), c.getAdresse(), c.getCodePostal(),
-                    c.getVille(), c.getTelephone(), c.getEmail(), c.getNSs(),
+                    c.getVille(), c.getTelephone(), c.getEmail(), c.getNss(),
                     c.getDateNaissance(), c.getMutuelle(), c.getMedecinRef()
             });
         }
@@ -1215,11 +1215,11 @@ public class MainSwing3 extends JFrame {
         JTable tableClientsOrdo = new JTable(modelClientsOrdo);
         tableClientsOrdo.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
 
-        for (Client client : Client.getClient()) {
+        for (Client client : Client.getClients()) {
             modelClientsOrdo.addRow(new Object[]{
                     client.getNom(),
                     client.getPrenom(),
-                    client.getNSs()
+                    client.getNss()
             });
         }
 
@@ -1262,8 +1262,8 @@ public class MainSwing3 extends JFrame {
 
         // Panel des boutons
         JPanel panelBoutonsOrdo = new JPanel(new FlowLayout());
-        JButton btnCreerOrdo = new JButton("✅ Créer l'Ordonnance");
-        JButton btnAnnulerOrdo = new JButton("❌ Annuler");
+        JButton btnCreerOrdo = new JButton("Créer l'Ordonnance");
+        JButton btnAnnulerOrdo = new JButton("Annuler");
 
         btnCreerOrdo.addActionListener(e -> {
             int ligneSelectionnee;
@@ -1275,8 +1275,8 @@ public class MainSwing3 extends JFrame {
                 return;
             }
             String nssSelectionne = (String) modelClientsOrdo.getValueAt(ligneSelectionnee, 2);
-            for (Client client : Client.getClient()) {
-                if (client.getNSs().equals(nssSelectionne)) {
+            for (Client client : Client.getClients()) {
+                if (client.getNss().equals(nssSelectionne)) {
                     clientSelectionne[0] = client;
                     break;
                 }
@@ -1339,7 +1339,7 @@ public class MainSwing3 extends JFrame {
 
     // Méthodes de sauvegarde
     private void sauvegarder() {
-        donnees.put("client", Client.getClient());
+        donnees.put("client", Client.getClients());
         donnees.put("medecin", Medecin.getMedecin());
         donnees.put("mutuelle", Mutuelle.getMutuelle());
         donnees.put("medicament", Medicament.getMedicament());
@@ -1360,12 +1360,12 @@ public class MainSwing3 extends JFrame {
         } else if (choix == JOptionPane.NO_OPTION) {
             System.exit(0);
         }
-        // Si CANCEL, on ne fait rien
+
     }
 
-    // Méthode principale pour lancer l'application
+
     public static void main(String[] args) {
-        // Utilisation du Look and Feel du système
+
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (Exception e) {

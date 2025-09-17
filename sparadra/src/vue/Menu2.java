@@ -29,9 +29,9 @@ public class Menu2 {
         List<Medicament> medicament = (List<Medicament>) donnees.getOrDefault("medicament", new java.util.ArrayList<>());
         List<Medecin> medecin = (List<Medecin>) donnees.getOrDefault("medecin", new java.util.ArrayList<>());
         List<Pharmacien> pharmacien = (List<Pharmacien>) donnees.getOrDefault("pharmacien", new java.util.ArrayList<>());
-        List<Client> client = (List<Client>) donnees.getOrDefault("client", new java.util.ArrayList<>());
+        List<Client> clients = (List<Client>) donnees.getOrDefault("clients", new java.util.ArrayList<>());
 
-        Client.setClient(client);
+        Client.setClients(clients);
         Mutuelle.setMutuelle(mutuelle);
         Medicament.setMedicament(medicament);
         Medecin.setMedecin(medecin);
@@ -118,7 +118,7 @@ public class Menu2 {
         }
     }
 
-    private  static void menuRechercheClient() throws SaisieException {
+    private  static void menuRechercheClient(){
         boolean fin = false;
         while (!fin) {
             Vue.vueMenuRechercheClients();
@@ -173,7 +173,7 @@ public class Menu2 {
             }
         }
     }
-    private static void menuRechercheMedecin() throws SaisieException {
+    private static void menuRechercheMedecin(){
         boolean fin = false;
         while (!fin) {
             Vue.vueMenuRechercheMedecin();
@@ -216,7 +216,7 @@ public class Menu2 {
         }
     }
 
-    private static void menuRechercheMutuelle() throws SaisieException {
+    private static void menuRechercheMutuelle() {
         boolean fin = false;
         while (!fin) {
             Vue.vueMenuRechercheMutuelle();
@@ -259,7 +259,7 @@ public class Menu2 {
         }
     }
 
-    private static void menuRechercheMedicament() throws SaisieException {
+    private static void menuRechercheMedicament(){
         boolean fin = false;
         while (!fin) {
             Vue.vueMenuRechercheMedicament();
@@ -304,7 +304,7 @@ public class Menu2 {
 
     public static List<Client> rechercherClientParNom(String nom) {
         List<Client> resultats = new ArrayList<>();
-        for (Client client : Client.getClient()) {
+        for (Client client : Client.getClients()) {
             if (client.getNom().toLowerCase().contains(nom.toLowerCase())) {
                 resultats.add(client);
             }
@@ -315,8 +315,8 @@ public class Menu2 {
 
     public static List<Client> rechercherClientParNSS(String nSs) {
         List<Client> resultats = new ArrayList<>();
-        for (Client client : Client.getClient()) {
-            if (client.getNSs().toLowerCase().contains(nSs.toLowerCase())) {
+        for (Client client : Client.getClients()) {
+            if (client.getNss().toLowerCase().contains(nSs.toLowerCase())) {
                 resultats.add(client);
             }
         }
@@ -325,7 +325,7 @@ public class Menu2 {
 
     public static List<Client> rechercherClientParEmail(String email) {
         List<Client> resultats = new ArrayList<>();
-        for (Client client : Client.getClient()) {
+        for (Client client : Client.getClients()) {
             if (client.getEmail().toLowerCase().contains(email.toLowerCase())) {
                 resultats.add(client);
             }
@@ -476,7 +476,7 @@ public class Menu2 {
 
     private static boolean quitterEtSauvegarder() {
         System.out.println("Sauvegarde en cours...");
-        donnees.put("client", Client.getClient());
+        donnees.put("clients", Client.getClients());
         donnees.put("mutuelle", Mutuelle.getMutuelle());
         donnees.put("medicament", Medicament.getMedicament());
         donnees.put("pharmacien", Pharmacien.getPharmacien());

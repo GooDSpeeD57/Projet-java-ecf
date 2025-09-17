@@ -93,7 +93,7 @@ public class MenTest2 {
     }
     public static List<Medicament> rechercherNomMedicament(String nom) {
         List<Medicament> resultats = new ArrayList<>();
-        for (Medicament medicament : Medicament.getMedicament()) {
+        for (Medicament medicament : Medicament.getMedicaments()) {
             if (medicament.getNomMedicament().toLowerCase().contains(nom.toLowerCase())) {
                 resultats.add(medicament);
             }
@@ -103,7 +103,7 @@ public class MenTest2 {
 
     public static List<Medicament> rechercherParCategorie(String nom) {
         List<Medicament> resultats = new ArrayList<>();
-        for (Medicament medicament : Medicament.getMedicament()) {
+        for (Medicament medicament : Medicament.getMedicaments()) {
             if (medicament.getCategorieMedicament().toLowerCase().contains(nom.toLowerCase())) {
                 resultats.add(medicament);
             }
@@ -112,7 +112,7 @@ public class MenTest2 {
     }
 
     private static void afficherTousLesMedicaments() {
-        for (Medicament medicament : Medicament.getMedicament()) {
+        for (Medicament medicament : Medicament.getMedicaments()) {
             System.out.println("==================================");
             System.out.println(medicament);
         }
@@ -182,7 +182,7 @@ public class MenTest2 {
     }
     public static List<Medicament> rechercherMedicamentsSansOrdonnanceParNom(String nom) {
         List<Medicament> resultats = new ArrayList<>();
-        for (Medicament medicament : Medicament.getMedicament()) {
+        for (Medicament medicament : Medicament.getMedicaments()) {
             if (medicament.getSansOrdonnanceMedicament().equalsIgnoreCase("oui") &&
                     medicament.getNomMedicament().toLowerCase().contains(nom.toLowerCase())) {
                 resultats.add(medicament);

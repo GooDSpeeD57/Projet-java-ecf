@@ -14,7 +14,7 @@ public class Medicament implements Serializable {
     private String dateMiseEnCirculation;
     private int quantiteMedicament;
     private String sansOrdonnanceMedicament;
-    private static List<Medicament> medicament = new ArrayList<>();
+    private static List<Medicament> medicaments = new ArrayList<>();
 
     public Medicament(String nomMedicament, String categorieMedicament,
                       double prixMedicament, String dateMiseEnCirculation,
@@ -25,7 +25,7 @@ public class Medicament implements Serializable {
         this.setDateMiseEnCirculation(dateMiseEnCirculation);
         this.setQuantiteMedicament(quantiteMedicament);
         this.setSansOrdonnanceMedicament(sansOrdonnanceMedicament);
-    medicament.add(this);
+    medicaments.add(this);
     }
 
     public String getNomMedicament() {
@@ -95,12 +95,12 @@ public class Medicament implements Serializable {
         }
     }
 
-    public static List<Medicament> getMedicament() {
-        return medicament;
+    public static List<Medicament> getMedicaments() {
+        return medicaments;
     }
 
-    public static void setMedicament(List<Medicament> medicament) {
-        Medicament.medicament = medicament;
+    public static void setMedicaments(List<Medicament> medicaments) {
+        Medicament.medicaments = medicaments;
     }
 
     public void retirerDuStock(int quantite) {

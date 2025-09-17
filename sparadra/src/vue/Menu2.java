@@ -25,17 +25,17 @@ public class Menu2 {
 
     private static void chargerDonnees() {
 
-        List<Mutuelle> mutuelle = (List<Mutuelle>) donnees.getOrDefault("mutuelle", new java.util.ArrayList<>());
-        List<Medicament> medicament = (List<Medicament>) donnees.getOrDefault("medicament", new java.util.ArrayList<>());
-        List<Medecin> medecin = (List<Medecin>) donnees.getOrDefault("medecin", new java.util.ArrayList<>());
-        List<Pharmacien> pharmacien = (List<Pharmacien>) donnees.getOrDefault("pharmacien", new java.util.ArrayList<>());
+        List<Mutuelle> mutuelles = (List<Mutuelle>) donnees.getOrDefault("mutuelles", new java.util.ArrayList<>());
+        List<Medicament> medicaments = (List<Medicament>) donnees.getOrDefault("medicaments", new java.util.ArrayList<>());
+        List<Medecin> medecins = (List<Medecin>) donnees.getOrDefault("medecins", new java.util.ArrayList<>());
+        List<Pharmacien> pharmaciens = (List<Pharmacien>) donnees.getOrDefault("pharmaciens", new java.util.ArrayList<>());
         List<Client> clients = (List<Client>) donnees.getOrDefault("clients", new java.util.ArrayList<>());
 
         Client.setClients(clients);
-        Mutuelle.setMutuelle(mutuelle);
-        Medicament.setMedicament(medicament);
-        Medecin.setMedecin(medecin);
-        Pharmacien.setPharmacien(pharmacien);
+        Mutuelle.setMutuelles(mutuelles);
+        Medicament.setMedicaments(medicaments);
+        Medecin.setMedecins(medecins);
+        Pharmacien.setPharmacien(pharmaciens);
     }
 
 
@@ -334,7 +334,7 @@ public class Menu2 {
     }
     public static List<Medecin> rechercherMedecinParNom(String nom) {
         List<Medecin> resultats = new ArrayList<>();
-        for (Medecin medecin : Medecin.getMedecin()) {
+        for (Medecin medecin : Medecin.getMedecins()) {
             if (medecin.getNom().toLowerCase().contains(nom.toLowerCase())) {
                 resultats.add(medecin);
             }
@@ -344,7 +344,7 @@ public class Menu2 {
 
     public static List<Medecin> rechercherMedecinParRPPS(String RPPS) {
         List<Medecin> resultats = new ArrayList<>();
-        for (Medecin medecins : Medecin.getMedecin()) {
+        for (Medecin medecins : Medecin.getMedecins()) {
             if (medecins.getRPPS().toLowerCase().contains(RPPS.toLowerCase())) {
                 resultats.add(medecins);
             }
@@ -352,7 +352,7 @@ public class Menu2 {
         return resultats;
     }
     private static void afficherTousLesMedecins() {
-        for (Medecin medecins : Medecin.getMedecin()) {
+        for (Medecin medecins : Medecin.getMedecins()) {
             System.out.println("==================================");
             System.out.println(medecins);
         }
@@ -360,7 +360,7 @@ public class Menu2 {
 
     public static List<Mutuelle> rechercherMutuelleParNom(String nom) {
         List<Mutuelle> resultats = new ArrayList<>();
-        for (Mutuelle mutuelles : Mutuelle.getMutuelle()) {
+        for (Mutuelle mutuelles : Mutuelle.getMutuelles()) {
             if (mutuelles.getNom().toLowerCase().contains(nom.toLowerCase())) {
                 resultats.add(mutuelles);
             }
@@ -369,7 +369,7 @@ public class Menu2 {
     }
     public static List<Mutuelle> rechercherMutuelleParDepartement(String departement) {
         List<Mutuelle> resultats = new ArrayList<>();
-        for (Mutuelle mutuelles : Mutuelle.getMutuelle()) {
+        for (Mutuelle mutuelles : Mutuelle.getMutuelles()) {
             if(mutuelles.getDepartement().equals(departement)) {
                 resultats.add(mutuelles);
             }
@@ -378,7 +378,7 @@ public class Menu2 {
     }
 
     private static void afficherToutesLesMutuelles() {
-        for (Mutuelle mutuelles : Mutuelle.getMutuelle()) {
+        for (Mutuelle mutuelles : Mutuelle.getMutuelles()) {
             System.out.println("==================================");
             System.out.println(mutuelles);
         }
@@ -386,7 +386,7 @@ public class Menu2 {
 
     public static List<Medicament> rechercherNomMedicament(String nom) {
         List<Medicament> resultats = new ArrayList<>();
-        for (Medicament medicament : Medicament.getMedicament()) {
+        for (Medicament medicament : Medicament.getMedicaments()) {
             if (medicament.getNomMedicament().toLowerCase().contains(nom.toLowerCase())) {
                 resultats.add(medicament);
             }
@@ -396,7 +396,7 @@ public class Menu2 {
 
     public static List<Medicament> rechercherParCategorie(String nom) {
         List<Medicament> resultats = new ArrayList<>();
-        for (Medicament medicament : Medicament.getMedicament()) {
+        for (Medicament medicament : Medicament.getMedicaments()) {
             if (medicament.getCategorieMedicament().toLowerCase().contains(nom.toLowerCase())) {
                 resultats.add(medicament);
             }
@@ -405,7 +405,7 @@ public class Menu2 {
     }
 
     private static void afficherTousLesMedicaments() {
-        for (Medicament medicament : Medicament.getMedicament()) {
+        for (Medicament medicament : Medicament.getMedicaments()) {
             System.out.println("==================================");
             System.out.println(medicament);
         }
@@ -477,10 +477,10 @@ public class Menu2 {
     private static boolean quitterEtSauvegarder() {
         System.out.println("Sauvegarde en cours...");
         donnees.put("clients", Client.getClients());
-        donnees.put("mutuelle", Mutuelle.getMutuelle());
-        donnees.put("medicament", Medicament.getMedicament());
-        donnees.put("pharmacien", Pharmacien.getPharmacien());
-        donnees.put("medecin", Medecin.getMedecin());
+        donnees.put("mutuelles", Mutuelle.getMutuelles());
+        donnees.put("medicaments", Medicament.getMedicaments());
+        donnees.put("pharmaciens", Pharmacien.getPharmacien());
+        donnees.put("medecins", Medecin.getMedecins());
         PersitSerializable.sauvegarder(donnees, FICHIER_PERSISTANCE);
         System.out.println("Au revoir !");
         return true;

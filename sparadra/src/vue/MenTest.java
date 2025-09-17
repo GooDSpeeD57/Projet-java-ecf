@@ -142,7 +142,7 @@ public class MenTest {
     }
     public static List<Medecin> rechercherMedecinParNom(String nom) {
         List<Medecin> resultats = new ArrayList<>();
-        for (Medecin medecin : Medecin.getMedecin()) {
+        for (Medecin medecin : Medecin.getMedecins()) {
             if (medecin.getNom().toLowerCase().contains(nom.toLowerCase())) {
                 resultats.add(medecin);
             }
@@ -152,7 +152,7 @@ public class MenTest {
 
     public static List<Medecin> rechercherMedecinParRPPS(String RPPS) {
         List<Medecin> resultats = new ArrayList<>();
-        for (Medecin medecins : Medecin.getMedecin()) {
+        for (Medecin medecins : Medecin.getMedecins()) {
             if (medecins.getRPPS().toLowerCase().contains(RPPS.toLowerCase())) {
                 resultats.add(medecins);
             }
@@ -160,7 +160,7 @@ public class MenTest {
         return resultats;
     }
     private static void afficherTousLesMedecins() {
-        for (Medecin medecins : Medecin.getMedecin()) {
+        for (Medecin medecins : Medecin.getMedecins()) {
             System.out.println("==================================");
             System.out.println(medecins);
         }
@@ -168,7 +168,7 @@ public class MenTest {
 
     public static List<Mutuelle> rechercherMutuelleParNom(String nom) {
         List<Mutuelle> resultats = new ArrayList<>();
-        for (Mutuelle mutuelles : Mutuelle.getMutuelle()) {
+        for (Mutuelle mutuelles : Mutuelle.getMutuelles()) {
             if (mutuelles.getNom().toLowerCase().contains(nom.toLowerCase())) {
                 resultats.add(mutuelles);
             }
@@ -177,7 +177,7 @@ public class MenTest {
     }
     public static List<Mutuelle> rechercherMutuelleParDepartement(String departement) {
         List<Mutuelle> resultats = new ArrayList<>();
-        for (Mutuelle mutuelles : Mutuelle.getMutuelle()) {
+        for (Mutuelle mutuelles : Mutuelle.getMutuelles()) {
             if(mutuelles.getDepartement().equals(departement)) {
                 resultats.add(mutuelles);
             }
@@ -186,7 +186,7 @@ public class MenTest {
     }
 
     private static void afficherToutesLesMutuelles() {
-        for (Mutuelle mutuelles : Mutuelle.getMutuelle()) {
+        for (Mutuelle mutuelles : Mutuelle.getMutuelles()) {
             System.out.println("==================================");
             System.out.println(mutuelles);
         }
@@ -194,7 +194,7 @@ public class MenTest {
 
     public static List<Medicament> rechercherNomMedicament(String nom) {
         List<Medicament> resultats = new ArrayList<>();
-        for (Medicament medicament : Medicament.getMedicament()) {
+        for (Medicament medicament : Medicament.getMedicaments()) {
             if (medicament.getNomMedicament().toLowerCase().contains(nom.toLowerCase())) {
                 resultats.add(medicament);
             }
@@ -204,7 +204,7 @@ public class MenTest {
 
     public static List<Medicament> rechercherParCategorie(String nom) {
         List<Medicament> resultats = new ArrayList<>();
-        for (Medicament medicament : Medicament.getMedicament()) {
+        for (Medicament medicament : Medicament.getMedicaments()) {
             if (medicament.getCategorieMedicament().toLowerCase().contains(nom.toLowerCase())) {
                 resultats.add(medicament);
             }
@@ -213,7 +213,7 @@ public class MenTest {
     }
 
     private static void afficherTousLesMedicaments() {
-        for (Medicament medicament : Medicament.getMedicament()) {
+        for (Medicament medicament : Medicament.getMedicaments()) {
             System.out.println("==================================");
             System.out.println(medicament);
         }

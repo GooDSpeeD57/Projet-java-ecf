@@ -23,22 +23,6 @@ public class Personne implements Serializable {
         this.setTelephone(telephone);
         this.setEmail(email);
     }
-    public Personne(String nom, String adresse, String codePostal,
-                    String ville, String telephone, String email)
-            throws SaisieException {
-        this.setNom(nom);
-        this.setAdresse(adresse);
-        this.setCodePostal(codePostal);
-        this.setVille(ville);
-        this.setTelephone(telephone);
-        this.setEmail(email);
-    }
-    public Personne(String nom, String prenom)
-            throws SaisieException {
-        this.setNom(nom);
-        this.setPrenom(prenom);
-
-    }
 
     public String getNom() {
         return this.nom;

@@ -14,7 +14,7 @@ public class Mutuelle implements Serializable {
     private static final long serialVersionUID = 1L;
     private String nom,adresse,codePostal,ville,telephone,email,departement;
     private int tRemboursement;
-    private static List<Mutuelle> mutuelle = new ArrayList<>();
+    private static List<Mutuelle> mutuelles = new ArrayList<>();
 
     public Mutuelle(String nom, String adresse, String codePostal,
                      String ville, String telephone, String email,String departement,int tRemboursement)
@@ -27,7 +27,7 @@ public class Mutuelle implements Serializable {
         this.setEmail(email);
         this.setDepartement(departement);
         this.setTRemboursement(tRemboursement);
-        mutuelle.add(this);
+        mutuelles.add(this);
     }
 
 
@@ -41,6 +41,8 @@ public class Mutuelle implements Serializable {
         }
         this.nom = nom;
     }
+
+    public String getAdresse() {return this.adresse;}
 
     public void setAdresse(String adresse) throws SaisieException {
         if (!RegexValidator.validerAdresse(adresse)) {
@@ -115,12 +117,12 @@ public class Mutuelle implements Serializable {
         this.tRemboursement = tRemboursement;
     }
 
-    public static List<Mutuelle> getMutuelle() {
-        return mutuelle;
+    public static List<Mutuelle> getMutuelles() {
+        return mutuelles;
     }
 
-    public static void setMutuelle(List<Mutuelle> mutuelle) {
-        Mutuelle.mutuelle = mutuelle;
+    public static void setMutuelles(List<Mutuelle> mutuelles) {
+        Mutuelle.mutuelles = mutuelles;
     }
 
     public String toString(){return

@@ -14,7 +14,7 @@ public class Medicament implements Serializable {
     private String dateMiseEnCirculation;
     private int quantiteMedicament;
     private String sansOrdonnanceMedicament;
-    private static List<Medicament> medicament = new ArrayList<>();
+    private static List<Medicament> medicaments = new ArrayList<>();
 
     public Medicament(String nomMedicament, String categorieMedicament,
                       double prixMedicament, String dateMiseEnCirculation,
@@ -25,7 +25,7 @@ public class Medicament implements Serializable {
         this.setDateMiseEnCirculation(dateMiseEnCirculation);
         this.setQuantiteMedicament(quantiteMedicament);
         this.setSansOrdonnanceMedicament(sansOrdonnanceMedicament);
-    medicament.add(this);
+    medicaments.add(this);
     }
 
     public String getNomMedicament() {
@@ -72,11 +72,19 @@ public class Medicament implements Serializable {
             this.dateMiseEnCirculation = dateMiseEnCirculation;
         }
     }
+    public int getQuantiteMedicament() {
+        return quantiteMedicament;
+    }
+
     public void setQuantiteMedicament(int quantiteMedicament) throws SaisieException {
         if (!RegexValidator.validerQuantite(quantiteMedicament)) {
             throw new SaisieException("Quantité ne peut pas être négatif !");
         }
         this.quantiteMedicament = quantiteMedicament;
+    }
+
+    public String getSansOrdonnanceMedicament(){
+        return sansOrdonnanceMedicament;
     }
 
     public void setSansOrdonnanceMedicament(String sansOrdonnanceMedicament) {
@@ -87,21 +95,28 @@ public class Medicament implements Serializable {
         }
     }
 
-    public static List<Medicament> getMedicament() {
-        return medicament;
+    public static List<Medicament> getMedicaments() {
+        return medicaments;
     }
 
-    public static void setMedicament(List<Medicament> medicament) {
-        Medicament.medicament = medicament;
+    public static void setMedicaments(List<Medicament> medicaments) {
+        Medicament.medicaments = medicaments;
     }
 
+    public void retirerDuStock(int quantite) {
+        if (quantite <= quantiteMedicament) {
+            this.quantiteMedicament -= quantite;
+        } else {
+            System.out.println("Stock insuffisant pour le médicament : " + nomMedicament);
+        }
+    }
     public String toString(){
         return "Nom du medicament : "+this.nomMedicament+
                 "\nCatégorie du medicament : "+this.categorieMedicament+
                 "\nPrix du medicament : "+this.prixMedicament+
                 "\nDate de mise sur le marché : "+this.dateMiseEnCirculation+
                 "\nQuantité du medicament : "+this.quantiteMedicament+
-                "\nDisponible sans ordonnance"+this.sansOrdonnanceMedicament;
+                "\nDisponible sans ordonnance : "+this.sansOrdonnanceMedicament;
     }
 }
 

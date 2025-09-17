@@ -3,11 +3,11 @@ package controleur;
 import exception.SaisieException;
 import vue.Menu2;
 
-public class Main2 {
+public class MainConsole {
     public static void main(String[] args) {
         try {
             Menu2.lancerApplication();
-//            Main.chargement();
+            Main.chargement();
             Menu2.menuPrincipal();
 
             }catch (SaisieException e){

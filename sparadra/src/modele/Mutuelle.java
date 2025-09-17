@@ -42,6 +42,8 @@ public class Mutuelle implements Serializable {
         this.nom = nom;
     }
 
+    public String getAdresse() {return this.adresse;}
+
     public void setAdresse(String adresse) throws SaisieException {
         if (!RegexValidator.validerAdresse(adresse)) {
             throw new SaisieException("Erreur dans l'adresse  Mutuelle ! Merci de corriger"+adresse);

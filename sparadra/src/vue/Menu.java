@@ -10,7 +10,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Scanner;
 
-public class Menu2 {
+public class Menu {
     private static final Scanner scanner = new Scanner(System.in);
     private static final String FICHIER_PERSISTANCE = "donnees.bin";
     private static Map<String, Object> donnees;

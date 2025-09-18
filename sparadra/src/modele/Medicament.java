@@ -103,6 +103,36 @@ public class Medicament implements Serializable {
         Medicament.medicaments = medicaments;
     }
 
+    public static List<Medicament> rechercherMedicamentParNom(String nom) {
+        List<Medicament> resultats = new ArrayList<>();
+        for (Medicament m : medicaments) {
+            if (m.getNomMedicament().toLowerCase().contains(nom.trim().toLowerCase())) {
+                resultats.add(m);
+            }
+        }
+        return resultats;
+    }
+
+    public static List<Medicament> rechercherMedicamentParCategorie(String categorie) {
+        List<Medicament> resultats = new ArrayList<>();
+        for (Medicament m : medicaments) {
+            if (m.getCategorieMedicament().toLowerCase().contains(categorie.trim().toLowerCase())) {
+                resultats.add(m);
+            }
+        }
+        return resultats;
+    }
+
+    public static List<Medicament> rechercherMedicamentParDisponibiliteSansOrdonnance(String disponibilite) {
+        List<Medicament> resultats = new ArrayList<>();
+        for (Medicament m : medicaments) {
+            if (m.getSansOrdonnanceMedicament().equalsIgnoreCase(disponibilite.trim())) {
+                resultats.add(m);
+            }
+        }
+        return resultats;
+    }
+
     public void retirerDuStock(int quantite) {
         if (quantite <= quantiteMedicament) {
             this.quantiteMedicament -= quantite;
@@ -110,6 +140,11 @@ public class Medicament implements Serializable {
             System.out.println("Stock insuffisant pour le médicament : " + nomMedicament);
         }
     }
+
+    public static void supprimerMedicament(Medicament medicament) {
+        medicaments.remove(medicament);
+    }
+
     public String toString(){
         return "Nom du medicament : "+this.nomMedicament+
                 "\nCatégorie du medicament : "+this.categorieMedicament+

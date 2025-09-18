@@ -12,7 +12,7 @@ public class Ordonnance implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private static final List<Ordonnance> ordonnances = new ArrayList<>();
+    private static List<Ordonnance> ordonnances = new ArrayList<>();
 
     private Medecin medecin;
     private Client client;
@@ -28,10 +28,12 @@ public class Ordonnance implements Serializable {
     }
 
     public Medecin getMedecin() {
+
         return medecin;
     }
 
-    public void setMedecin(Medecin medecin) {
+    public void setMedecin(Medecin medecin)
+    {
         this.medecin = medecin;
     }
 
@@ -63,16 +65,41 @@ public class Ordonnance implements Serializable {
         return DateTimePaternFr.formatDate(dateOrdonnance, "dd/MM/yyyy");
     }
 
+    public static List<Ordonnance> getOrdonnances() {
+        return ordonnances;
+    }
+    public static void setOrdonnances(List<Ordonnance> ordonnances) {Ordonnance.ordonnances=ordonnances;}
 
-    public static void ajouterOrdonnance(Ordonnance ordonnance) {
-        if (ordonnance != null) {
-            ordonnances.add(ordonnance);
+    public static List<Ordonnance> rechercherOrdonnanceParClient(Client client) {
+        List<Ordonnance> resultats = new ArrayList<>();
+        for (Ordonnance o : ordonnances) {
+            if (o.getClient().equals(client)) {
+                resultats.add(o);
+            }
         }
+        return resultats;
     }
 
-    public static List<Ordonnance> getToutesLesOrdonnances() {
-        return Collections.unmodifiableList(ordonnances);
+    public static List<Ordonnance> rechercherOrdonnanceParMedecin(Medecin medecin) {
+        List<Ordonnance> resultats = new ArrayList<>();
+        for (Ordonnance o : ordonnances) {
+            if (o.getMedecin().equals(medecin)) {
+                resultats.add(o);
+            }
+        }
+        return resultats;
     }
+
+    public static List<Ordonnance> rechercherOrdonnanceParDate(LocalDate date) {
+        List<Ordonnance> resultats = new ArrayList<>();
+        for (Ordonnance o : ordonnances) {
+            if (o.getDateOrdonnance().equals(date)) {
+                resultats.add(o);
+            }
+        }
+        return resultats;
+    }
+
 
     @Override
     public String toString() {
@@ -81,11 +108,10 @@ public class Ordonnance implements Serializable {
             prescriptionsStr += "\n    - " + p.toString();
         }
 
-        return "Ordonnance {\n" +
-                "  Médecin      = " + medecin + "\n" +
-                "  Client       = " + client + ",\n" +
-                "  Date         = " + getDateOrdonnanceFormatee() + ",\n" +
-                "  Prescriptions =" + prescriptionsStr + "\n" +
-                "}";
+        return "\nOrdonnance"
+               +"\nMédecin       : " + this.medecin
+                +"\nClient        : " + this.client
+                 +"\nDate          : " + getDateOrdonnanceFormatee()
+                  +"\nPrescriptions :" + prescriptionsStr ;
     }
 }

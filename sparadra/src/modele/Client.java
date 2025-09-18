@@ -76,7 +76,7 @@ public class Client extends Personne {
     public static List<Client> rechercherClientParNom(String nom) {
         List<Client> resultats = new ArrayList<>();
         for (Client c : clients) {
-            if (c.getNom() != null && c.getNom().equalsIgnoreCase(nom.trim())) {
+            if (c.getNom() != null && c.getNom().toLowerCase().contains(nom.trim().toLowerCase())) {
                 resultats.add(c);
             }
         }
@@ -102,14 +102,17 @@ public class Client extends Personne {
         }
         return resultats;
     }
+    public static void supprimerClient(Client client) {
+        clients.remove(client);
+    }
 
 @Override
     public String toString(){
-        return super.toString()+
-                "\nNuméro de Sécurité Sociale : "+this.nss
-                +"\nDate de Naissance : "+this.dateNaissance
-                 +"\nMutuelle : "+this.mutuelle
-                  +"\nMédecin Référent : "+this.medecinRef;
+        return super.toString()
+               +"\nNuméro de Sécurité Sociale : "+this.nss
+               +"\nDate de Naissance          : "+this.dateNaissance
+               +"\nMutuelle                   : "+this.mutuelle
+               +"\nMédecin Référent           : "+this.medecinRef;
     }
 }
 

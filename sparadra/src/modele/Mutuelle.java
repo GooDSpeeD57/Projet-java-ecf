@@ -125,15 +125,40 @@ public class Mutuelle implements Serializable {
         Mutuelle.mutuelles = mutuelles;
     }
 
+    public static List<Mutuelle> rechercherMutuelleParNom(String nom) {
+        List<Mutuelle> resultats = new ArrayList<>();
+        for (Mutuelle m : mutuelles) {
+            if (m.getNom().toLowerCase().contains(nom.trim().toLowerCase())) {
+                resultats.add(m);
+            }
+        }
+        return resultats;
+    }
+
+    public static List<Mutuelle> rechercherMutuelleParDepartement(String departement) {
+        List<Mutuelle> resultats = new ArrayList<>();
+        for (Mutuelle m : mutuelles) {
+            if (m.getDepartement().toLowerCase().contains(departement.trim().toLowerCase())) {
+                resultats.add(m);
+            }
+        }
+        return resultats;
+    }
+
+    public static void supprimerMutuelle(Mutuelle mutuelle) {
+        mutuelles.remove(mutuelle);
+    }
+
     public String toString(){return
-            "\nNom : "+this.nom
-            +"\nAdresse : "+this.adresse
-             +"\nCodePostal : "+this.codePostal
-              +"\nVille : "+this.ville
-               +"\nTelephone : "+this.telephone
-                +"\nEmail : "+this.email
-                 +"\nDépartement : " + this.departement
-                  +"\nTaux de remboursement : " + this.tRemboursement;
+            "\nMutuelle"
+            +"\nNom : "+this.nom
+             +"\nAdresse : "+this.adresse
+              +"\nCodePostal : "+this.codePostal
+               +"\nVille : "+this.ville
+                +"\nTelephone : "+this.telephone
+                 +"\nEmail : "+this.email
+                  +"\nDépartement : " + this.departement
+                   +"\nTaux de remboursement : " + this.tRemboursement;
     }
 }
 

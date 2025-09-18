@@ -3,20 +3,26 @@ package modele;
 import java.io.Serializable;
 
 public class Prescription implements Serializable {
-    private Medicament medicament;
+
+    private static final long serialVersionUID = 1L;
+
+    private String nomMedicament;
+    private double prixUnitaire;
     private int quantitePrescrite;
 
     public Prescription(Medicament medicament, int quantitePrescrite) {
-        this.medicament = medicament;
+        if (medicament == null) throw new IllegalArgumentException("Le médicament ne peut pas être null.");
+        this.nomMedicament = medicament.getNomMedicament();
+        this.prixUnitaire = medicament.getPrixMedicament();
         this.quantitePrescrite = quantitePrescrite;
     }
 
-    public Medicament getMedicament() {
-        return medicament;
+    public String getNomMedicament() {
+        return nomMedicament;
     }
 
-    public void setMedicament(Medicament medicament) {
-        this.medicament = medicament;
+    public double getPrixUnitaire() {
+        return prixUnitaire;
     }
 
     public int getQuantitePrescrite() {
@@ -27,24 +33,16 @@ public class Prescription implements Serializable {
         this.quantitePrescrite = quantitePrescrite;
     }
 
-    public String getNomMedicament() {
-        return medicament != null ? medicament.getNomMedicament() : "Inconnu";
-    }
-
-    public double getPrixUnitaire() {
-        return medicament != null ? medicament.getPrixMedicament() : 0.0;
-    }
-
     public double getPrixTotal() {
-        return getPrixUnitaire() * quantitePrescrite;
+        return prixUnitaire * quantitePrescrite;
     }
 
     @Override
     public String toString() {
         return "Prescription : " +
-                "Médicament = " + getNomMedicament() +
+                "Médicament = " + nomMedicament +
                 ", Quantité prescrite = " + quantitePrescrite +
-                ", Prix unitaire = " + getPrixUnitaire() + "€" +
-                ", Prix total = " + getPrixTotal() + "€";
+                ", Prix unitaire = " + String.format("%.2f", prixUnitaire) + "€" +
+                ", Prix total = " + String.format("%.2f", getPrixTotal()) + "€";
     }
 }

@@ -40,7 +40,7 @@ public class Medecin extends Personne {
     public static List<Medecin> rechercherParNom(String nom) {
         List<Medecin> resultats = new ArrayList<>();
         for (Medecin m : medecins) {
-            if (m.getNom() != null && m.getNom().equalsIgnoreCase(nom.trim())) {
+            if (m.getNom() != null && m.getNom().toLowerCase().contains(nom.trim().toLowerCase())) {
                 resultats.add(m);
             }
         }
@@ -67,7 +67,9 @@ public class Medecin extends Personne {
         return resultats;
     }
 
-
+    public static void supprimerMedecin(Medecin medecin) {
+        medecins.remove(medecin);
+    }
 
     public String toString() {
         return super.toString()+"\nN° RPPS: "+this.rPPS;

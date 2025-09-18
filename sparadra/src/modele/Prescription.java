@@ -1,35 +1,50 @@
 package modele;
 
-public class Prescription {
-    private String nomMedicament;
-    private int quantite;
+import java.io.Serializable;
 
-    public Prescription(String nomMedicament, int quantite) {
-        this.nomMedicament = nomMedicament;
-        this.quantite = quantite;
+public class Prescription implements Serializable {
+    private Medicament medicament;
+    private int quantitePrescrite;
+
+    public Prescription(Medicament medicament, int quantitePrescrite) {
+        this.medicament = medicament;
+        this.quantitePrescrite = quantitePrescrite;
+    }
+
+    public Medicament getMedicament() {
+        return medicament;
+    }
+
+    public void setMedicament(Medicament medicament) {
+        this.medicament = medicament;
+    }
+
+    public int getQuantitePrescrite() {
+        return quantitePrescrite;
+    }
+
+    public void setQuantitePrescrite(int quantitePrescrite) {
+        this.quantitePrescrite = quantitePrescrite;
     }
 
     public String getNomMedicament() {
-        return nomMedicament;
+        return medicament != null ? medicament.getNomMedicament() : "Inconnu";
     }
 
-    public void setNomMedicament(String nomMedicament) {
-        this.nomMedicament = nomMedicament;
+    public double getPrixUnitaire() {
+        return medicament != null ? medicament.getPrixMedicament() : 0.0;
     }
 
-    public int getQuantite() {
-        return quantite;
-    }
-
-    public void setQuantite(int quantite) {
-        this.quantite = quantite;
+    public double getPrixTotal() {
+        return getPrixUnitaire() * quantitePrescrite;
     }
 
     @Override
     public String toString() {
-        return "Prescription{" +
-                "nomMedicament='" + nomMedicament + '\'' +
-                ", quantite=" + quantite +
-                '}';
+        return "Prescription : " +
+                "Médicament = " + getNomMedicament() +
+                ", Quantité prescrite = " + quantitePrescrite +
+                ", Prix unitaire = " + getPrixUnitaire() + "€" +
+                ", Prix total = " + getPrixTotal() + "€";
     }
 }

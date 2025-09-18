@@ -9,6 +9,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
@@ -16,6 +17,7 @@ import java.util.Map;
 import modele.*;
 import exception.SaisieException;
 import utilitaires.PersitSerializable;
+import modele.Prescription;
 
 public class MainSwing extends JFrame {
 
@@ -598,10 +600,7 @@ public class MainSwing extends JFrame {
                 if (e.getClickCount() == 2) {
                     int row = tableMedecin.getSelectedRow();
                     if (row != -1) {
-                        // Récupérer le médecin sélectionné depuis la liste
                         Medecin m = Medecin.getMedecins().get(row);
-
-                        // Remplir les champs avec ses infos
                         txtNomMedecin.setText(m.getNom());
                         txtPrenomMedecin.setText(m.getPrenom());
                         txtAdresseMedecin.setText(m.getAdresse());
@@ -624,12 +623,10 @@ public class MainSwing extends JFrame {
         private void creerPanelMutuelle() {
             panelMutuelle = new JPanel(new BorderLayout());
 
-
             JPanel panelSaisieMutuelle = new JPanel(new GridBagLayout());
             panelSaisieMutuelle.setBorder(new TitledBorder("Nouvelle Mutuelle"));
             GridBagConstraints gbc = new GridBagConstraints();
             gbc.insets = new Insets(5, 5, 5, 5);
-
 
             gbc.gridx = 0;
             gbc.gridy = 0;
@@ -905,7 +902,7 @@ public class MainSwing extends JFrame {
         panelSuperiorMedicament.add(panelSaisieMedicament);
         panelSuperiorMedicament.add(panelRechercheMedicament);
 
-        String[] colonnesMedicament = {"Nom", "Catégorie", "Prix", "Date Circulation", "Quantité", "Sans OrdonnanceTwo"};
+        String[] colonnesMedicament = {"Nom", "Catégorie", "Prix", "Date Circulation", "Quantité", "Sans Ordonnance"};
         modelMedicament = new DefaultTableModel(colonnesMedicament, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -942,8 +939,9 @@ public class MainSwing extends JFrame {
     private void creerPanelOrdonnance() {
         panelOrdonnance = new JPanel(new BorderLayout());
 
+        // --- Panel haut (boutons) ---
         JPanel panelCreationOrdonnance = new JPanel(new FlowLayout());
-        panelCreationOrdonnance.setBorder(new TitledBorder("➕ Nouvelle OrdonnanceTwo"));
+        panelCreationOrdonnance.setBorder(new TitledBorder("➕ Nouvelle Ordonnance"));
 
         JButton btnNouvelleOrdo = new JButton("\uD83D\uDCCB Créer une ordonnance");
         btnNouvelleOrdo.setFont(new Font("Segoe UI Emoji", Font.PLAIN, 14));
@@ -952,11 +950,24 @@ public class MainSwing extends JFrame {
         JButton btnActualiserOrdo = new JButton("🔄 Actualiser");
         btnActualiserOrdo.addActionListener(e -> chargerOrdonnances());
 
+        JButton btnVoirMedicaments = new JButton("📦 Voir les médicaments");
+        btnVoirMedicaments.addActionListener(e -> {
+            int selectedRow = tableOrdonnance.getSelectedRow();
+            if (selectedRow == -1) {
+                JOptionPane.showMessageDialog(this, "Veuillez sélectionner une ordonnance.", "Erreur", JOptionPane.WARNING_MESSAGE);
+                return;
+            }
+
+            // Récupération de l'ordonnance depuis la liste globale
+            Ordonnance ordonnance = Ordonnance.getToutesLesOrdonnances().get(selectedRow);
+            afficherMedicamentsDeLOrdonnance(ordonnance);
+        });
+
         panelCreationOrdonnance.add(btnNouvelleOrdo);
         panelCreationOrdonnance.add(btnActualiserOrdo);
+        panelCreationOrdonnance.add(btnVoirMedicaments);
 
-        // Table des Ordonnances
-        String[] colonnesOrdo = {"Client", "Médecin", "Date", "Statut"};
+        String[] colonnesOrdo = {"Client", "Médecin", "Date", "Nb Médicaments"};
         modelOrdonnance = new DefaultTableModel(colonnesOrdo, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -970,7 +981,34 @@ public class MainSwing extends JFrame {
 
         panelOrdonnance.add(panelCreationOrdonnance, BorderLayout.NORTH);
         panelOrdonnance.add(scrollOrdonnance, BorderLayout.CENTER);
+
+        // Charger les ordonnances au démarrage
+        chargerOrdonnances();
     }
+    private void afficherMedicamentsDeLOrdonnance(Ordonnance ordonnance) {
+        JDialog dialog = new JDialog(this, "📦 Médicaments de l'ordonnance", true);
+        dialog.setSize(600, 400);
+        dialog.setLocationRelativeTo(this);
+
+        String[] colonnes = {"Nom", "Quantité", "Prix Unitaire (€)", "Prix Total (€)"};
+        DefaultTableModel model = new DefaultTableModel(colonnes, 0);
+
+        for (Prescription p : ordonnance.getPrescriptions()) {
+            model.addRow(new Object[]{
+                    p.getNomMedicament(),
+                    p.getQuantitePrescrite(),
+                    String.format("%.2f", p.getPrixUnitaire()),
+                    String.format("%.2f", p.getPrixTotal())
+            });
+        }
+
+        JTable table = new JTable(model);
+        JScrollPane scrollPane = new JScrollPane(table);
+
+        dialog.add(scrollPane);
+        dialog.setVisible(true);
+    }
+
 
     private void creerPanelHistorique() {
         panelHistorique = new JPanel(new BorderLayout());
@@ -1078,9 +1116,14 @@ public class MainSwing extends JFrame {
 
     private void chargerOrdonnances() {
         modelOrdonnance.setRowCount(0);
-        // Cette méthode sera complétée quand la classe OrdonnanceTwo sera créée
-        // Pour l'instant, on ajoute juste un placeholder
-        modelOrdonnance.addRow(new Object[]{"Aucune ordonnance", "", "", ""});
+        for (Ordonnance ordonnance : Ordonnance.getToutesLesOrdonnances()) {
+            modelOrdonnance.addRow(new Object[]{
+                    ordonnance.getClient().getNom() + " " + ordonnance.getClient().getPrenom(),
+                    ordonnance.getMedecin().getNom() + " " + ordonnance.getMedecin().getPrenom(),
+                    ordonnance.getDateOrdonnanceFormatee(),
+                    ordonnance.getPrescriptions().size()
+            });
+        }
     }
 
     private void chargerHistorique() {
@@ -1513,7 +1556,6 @@ public class MainSwing extends JFrame {
         }
 
         modelMutuelle.setRowCount(0);
-        // Implémentation temporaire - à adapter selon votre classe Mutuelle
         for (Mutuelle m : Mutuelle.getMutuelles()) {
             if (m.getNom().toLowerCase().contains(nom.toLowerCase())) {
                 modelMutuelle.addRow(new Object[]{
@@ -1578,99 +1620,64 @@ public class MainSwing extends JFrame {
         }
     }
 
-    // Dialogue de création d'ordonnance
+
     private void ouvrirDialogueCreationOrdonnance() {
-        JDialog dialogOrdonnance = new JDialog(this, "📋 Créer une OrdonnanceTwo", true);
+        JDialog dialogOrdonnance = new JDialog(this, "📋 Créer une Ordonnance", true);
         dialogOrdonnance.setSize(1200, 800);
         dialogOrdonnance.setLocationRelativeTo(this);
 
         JPanel panelPrincipal = new JPanel(new BorderLayout());
         panelPrincipal.setBorder(new EmptyBorder(10, 10, 10, 10));
 
-        // Variables pour stocker les sélections
+
         final Client[] clientSelectionne = {null};
         final Medecin[] medecinSelectionne = {null};
 
-        // Panel de sélection du client
+
         JPanel panelClient = new JPanel(new BorderLayout());
         panelClient.setBorder(new TitledBorder("👤 Sélection du Client"));
-
         String[] colonnesClientsOrdo = {"Nom", "Prénom", "NSS"};
         DefaultTableModel modelClientsOrdo = new DefaultTableModel(colonnesClientsOrdo, 0) {
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                return false;
-            }
+            @Override public boolean isCellEditable(int row, int column) { return false; }
         };
         JTable tableClientsOrdo = new JTable(modelClientsOrdo);
         tableClientsOrdo.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-
         for (Client client : Client.getClients()) {
-            modelClientsOrdo.addRow(new Object[]{
-                    client.getNom(),
-                    client.getPrenom(),
-                    client.getNss()
-            });
+            modelClientsOrdo.addRow(new Object[]{ client.getNom(), client.getPrenom(), client.getNss() });
         }
-
         JScrollPane scrollClientsOrdo = new JScrollPane(tableClientsOrdo);
         scrollClientsOrdo.setPreferredSize(new Dimension(650, 150));
         panelClient.add(scrollClientsOrdo, BorderLayout.CENTER);
 
-        // Panel de sélection du médecin
         JPanel panelMedecin = new JPanel(new BorderLayout());
         panelMedecin.setBorder(new TitledBorder("👨‍⚕️ Sélection du Médecin"));
-
         String[] colonnesMedecinsOrdo = {"Nom", "Prénom", "RPPS"};
         DefaultTableModel modelMedecinsOrdo = new DefaultTableModel(colonnesMedecinsOrdo, 0) {
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                return false;
-            }
+            @Override public boolean isCellEditable(int row, int column) { return false; }
         };
         JTable tableMedecinsOrdo = new JTable(modelMedecinsOrdo);
         tableMedecinsOrdo.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
-
         for (Medecin medecin : Medecin.getMedecins()) {
-            modelMedecinsOrdo.addRow(new Object[]{
-                    medecin.getNom(),
-                    medecin.getPrenom(),
-                    medecin.getRPPS()
-            });
+            modelMedecinsOrdo.addRow(new Object[]{ medecin.getNom(), medecin.getPrenom(), medecin.getRPPS() });
         }
-
         JScrollPane scrollMedecinsOrdo = new JScrollPane(tableMedecinsOrdo);
         scrollMedecinsOrdo.setPreferredSize(new Dimension(650, 150));
         panelMedecin.add(scrollMedecinsOrdo, BorderLayout.CENTER);
 
-        // Panel de sélection du médicament
         JPanel panelMedicament = new JPanel(new BorderLayout());
         panelMedicament.setBorder(new TitledBorder("📦 Sélection du Médicament"));
-
         String[] colonnesMedicamentsOrdo = {"Nom", "Prix", "Quantité Disponible"};
         DefaultTableModel modelMedicamentsOrdo = new DefaultTableModel(colonnesMedicamentsOrdo, 0) {
-            @Override
-            public boolean isCellEditable(int row, int column) {
-                return false;
-            }
+            @Override public boolean isCellEditable(int row, int column) { return false; }
         };
-
         JTable tableMedicamentsOrdo = new JTable(modelMedicamentsOrdo);
         tableMedicamentsOrdo.setSelectionMode(ListSelectionModel.MULTIPLE_INTERVAL_SELECTION);
-
-// Remplir la table avec les médicaments disponibles
         for (Medicament medicament : Medicament.getMedicaments()) {
-            modelMedicamentsOrdo.addRow(new Object[]{
-                    medicament.getNomMedicament(),
-                    medicament.getPrixMedicament(),
-                    medicament.getQuantiteMedicament(),
-            });
+            modelMedicamentsOrdo.addRow(new Object[]{ medicament.getNomMedicament(), medicament.getPrixMedicament(), medicament.getQuantiteMedicament() });
         }
-
         JScrollPane scrollMedicamentsOrdo = new JScrollPane(tableMedicamentsOrdo);
         scrollMedicamentsOrdo.setPreferredSize(new Dimension(650, 150));
         panelMedicament.add(scrollMedicamentsOrdo, BorderLayout.CENTER);
-
 
         JPanel panelTables = new JPanel();
         panelTables.setLayout(new BoxLayout(panelTables, BoxLayout.Y_AXIS));
@@ -1680,15 +1687,14 @@ public class MainSwing extends JFrame {
         panelTables.add(Box.createRigidArea(new Dimension(0, 10)));
         panelTables.add(panelMedicament);
 
-
+        // Boutons
         JPanel panelBoutonsOrdo = new JPanel(new FlowLayout());
-        JButton btnCreerOrdo = new JButton("✅ Créer l'OrdonnanceTwo");
+        JButton btnCreerOrdo = new JButton("✅ Créer l'Ordonnance");
         JButton btnAnnulerOrdo = new JButton("❌ Annuler");
 
         btnCreerOrdo.addActionListener(e -> {
             int ligneSelectionnee;
 
-            // Vérifier sélection du client
             ligneSelectionnee = tableClientsOrdo.getSelectedRow();
             if (ligneSelectionnee == -1) {
                 JOptionPane.showMessageDialog(dialogOrdonnance, "Veuillez sélectionner un client!", "Erreur", JOptionPane.WARNING_MESSAGE);
@@ -1702,7 +1708,6 @@ public class MainSwing extends JFrame {
                 }
             }
 
-            // Vérifier sélection du médecin
             ligneSelectionnee = tableMedecinsOrdo.getSelectedRow();
             if (ligneSelectionnee == -1) {
                 JOptionPane.showMessageDialog(dialogOrdonnance, "Veuillez sélectionner un médecin!", "Erreur", JOptionPane.WARNING_MESSAGE);
@@ -1716,36 +1721,71 @@ public class MainSwing extends JFrame {
                 }
             }
 
-            // Sélection des médicaments
             int[] lignesMedicaments = tableMedicamentsOrdo.getSelectedRows();
             if (lignesMedicaments.length == 0) {
                 JOptionPane.showMessageDialog(dialogOrdonnance, "Veuillez sélectionner au moins un médicament!", "Erreur", JOptionPane.WARNING_MESSAGE);
                 return;
             }
 
-            List<Medicament> medicamentsSelectionnes = new ArrayList<>();
-            StringBuilder medicamentList = new StringBuilder();
+            List<Prescription> prescriptions = new ArrayList<>();
 
             for (int ligne : lignesMedicaments) {
                 String nomMedicament = (String) modelMedicamentsOrdo.getValueAt(ligne, 0);
+                Medicament medicamentChoisi = null;
                 for (Medicament m : Medicament.getMedicaments()) {
                     if (m.getNomMedicament().equals(nomMedicament)) {
-                        medicamentsSelectionnes.add(m);
-                        medicamentList.append("• ").append(m.getNomMedicament()).append("\n");
+                        medicamentChoisi = m;
                         break;
                     }
                 }
+                if (medicamentChoisi == null) continue;
+
+
+                int quantitePrescrite = 0;
+                boolean valid = false;
+                while (!valid) {
+                    String input = JOptionPane.showInputDialog(dialogOrdonnance,
+                            "Quantité pour le médicament \"" + medicamentChoisi.getNomMedicament() + "\" (max " + medicamentChoisi.getQuantiteMedicament() + ") :",
+                            "Quantité Médicament",
+                            JOptionPane.QUESTION_MESSAGE);
+                    if (input == null) {
+
+                        return;
+                    }
+                    try {
+                        quantitePrescrite = Integer.parseInt(input);
+                        if (quantitePrescrite <= 0) {
+                            JOptionPane.showMessageDialog(dialogOrdonnance, "La quantité doit être supérieure à 0.", "Erreur", JOptionPane.ERROR_MESSAGE);
+                        } else if (quantitePrescrite > medicamentChoisi.getQuantiteMedicament()) {
+                            JOptionPane.showMessageDialog(dialogOrdonnance, "Quantité supérieure au stock disponible.", "Erreur", JOptionPane.ERROR_MESSAGE);
+                        } else {
+                            valid = true;
+                        }
+                    } catch (NumberFormatException ex) {
+                        JOptionPane.showMessageDialog(dialogOrdonnance, "Veuillez entrer un nombre entier valide.", "Erreur", JOptionPane.ERROR_MESSAGE);
+                    }
+                }
+
+                prescriptions.add(new Prescription(medicamentChoisi, quantitePrescrite));
             }
 
+            LocalDate dateOrdonnance = LocalDate.now();// a modifier car c est la date de l ordonnance
+
             try {
-                // 👉 Ici tu peux créer une instance de OrdonnanceTwo avec le client, médecin et la liste des médicaments
-                // new OrdonnanceTwo(clientSelectionne[0], medecinSelectionne[0], medicamentsSelectionnes);
+
+                Ordonnance ordonnance = new Ordonnance(medecinSelectionne[0], clientSelectionne[0], prescriptions, dateOrdonnance);
+                Ordonnance.ajouterOrdonnance(ordonnance);
 
                 chargerOrdonnances();
                 dialogOrdonnance.dispose();
 
+                String medicamentList = "";
+                for (Prescription p : prescriptions) {
+                    medicamentList = medicamentList + "• " + p.getNomMedicament() + " x" + p.getQuantitePrescrite() + "\n";
+                }
+
                 JOptionPane.showMessageDialog(this,
-                        "OrdonnanceTwo créée avec succès!\n\n" +
+                        "Ordonnance créée avec succès!\n\n" +
                                 "👤 Client: " + clientSelectionne[0].getNom() + " " + clientSelectionne[0].getPrenom() + "\n" +
                                 "👨‍⚕️ Médecin: " + medecinSelectionne[0].getNom() + " " + medecinSelectionne[0].getPrenom() + "\n\n" +
                                 "📦 Médicaments:\n" + medicamentList.toString(),
@@ -1757,7 +1797,6 @@ public class MainSwing extends JFrame {
                         "❌ Erreur", JOptionPane.ERROR_MESSAGE);
             }
         });
-
 
         btnAnnulerOrdo.addActionListener(e -> dialogOrdonnance.dispose());
 

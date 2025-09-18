@@ -12,7 +12,7 @@ public class Ordonnance implements Serializable {
 
     private static final long serialVersionUID = 1L;
 
-    private static final List<Ordonnance> ordonnances = new ArrayList<>();
+    private static List<Ordonnance> ordonnances = new ArrayList<>();
 
     private Medecin medecin;
     private Client client;
@@ -63,16 +63,10 @@ public class Ordonnance implements Serializable {
         return DateTimePaternFr.formatDate(dateOrdonnance, "dd/MM/yyyy");
     }
 
-
-    public static void ajouterOrdonnance(Ordonnance ordonnance) {
-        if (ordonnance != null) {
-            ordonnances.add(ordonnance);
-        }
+    public static List<Ordonnance> getOrdonnances() {
+        return ordonnances;
     }
-
-    public static List<Ordonnance> getToutesLesOrdonnances() {
-        return Collections.unmodifiableList(ordonnances);
-    }
+    public static void setOrdonnances(List<Ordonnance> ordonnances) {Ordonnance.ordonnances=ordonnances;}
 
     @Override
     public String toString() {
@@ -81,11 +75,10 @@ public class Ordonnance implements Serializable {
             prescriptionsStr += "\n    - " + p.toString();
         }
 
-        return "Ordonnance {\n" +
-                "  Médecin      = " + medecin + "\n" +
-                "  Client       = " + client + ",\n" +
-                "  Date         = " + getDateOrdonnanceFormatee() + ",\n" +
-                "  Prescriptions =" + prescriptionsStr + "\n" +
-                "}";
+        return "\nOrdonnance"
+               +"\nMédecin       : " + this.medecin
+                +"\nClient        : " + this.client
+                 +"\nDate          : " + getDateOrdonnanceFormatee()
+                  +"\nPrescriptions :" + prescriptionsStr ;
     }
 }

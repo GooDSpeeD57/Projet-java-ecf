@@ -126,14 +126,15 @@ public class Mutuelle implements Serializable {
     }
 
     public String toString(){return
-            "\nNom : "+this.nom
-            +"\nAdresse : "+this.adresse
-             +"\nCodePostal : "+this.codePostal
-              +"\nVille : "+this.ville
-               +"\nTelephone : "+this.telephone
-                +"\nEmail : "+this.email
-                 +"\nDépartement : " + this.departement
-                  +"\nTaux de remboursement : " + this.tRemboursement;
+            "\nMutuelle"
+            +"\nNom : "+this.nom
+             +"\nAdresse : "+this.adresse
+              +"\nCodePostal : "+this.codePostal
+               +"\nVille : "+this.ville
+                +"\nTelephone : "+this.telephone
+                 +"\nEmail : "+this.email
+                  +"\nDépartement : " + this.departement
+                   +"\nTaux de remboursement : " + this.tRemboursement;
     }
 }
 

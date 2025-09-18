@@ -24,31 +24,31 @@ public class MainSwing extends JFrame {
     private static final String FICHIER_PERSISTANCE = "donnees.bin";
     private static Map<String, Object> donnees;
 
-    // Composants principaux
+
     private JTabbedPane tabbedPane;
-    private JPanel panelAccueil, panelClient, panelMedecin, panelMutuelle, panelOrdonnance, panelMedicament, panelHistorique;
+    private JPanel panelAccueil, panelClient, panelMedecin, panelMutuelle, panelOrdonnance, panelMedicament, panelFacturation;
 
     // Tables pour affichage des données
-    private JTable tableClient, tableMedecin, tableMutuelle, tableMedicament, tableHistorique, tableOrdonnance;
-    private DefaultTableModel modelClient, modelMedecin, modelMutuelle, modelOrdonnance, modelMedicament, modelHistorique;
+    private JTable tableClient, tableMedecin, tableMutuelle, tableMedicament, tableFacturation, tableOrdonnance;
+    private DefaultTableModel modelClient, modelMedecin, modelMutuelle, modelOrdonnance, modelMedicament, modelFacturation;
 
-    // Composants de saisie pour Client
+
     private JTextField txtNomClient, txtPrenomClient, txtAdresseClient, txtCodePostalClient, txtVilleClient, txtTelephoneClient;
     private JTextField txtEmailClient, txtNssClient, txtDateNaissanceClient, txtMutuelleClient, txtMedecinrefClient;
 
-    // Composants de saisie pour Médecin
+
     private JTextField txtNomMedecin, txtPrenomMedecin, txtAdresseMedecin, txtCodePostalMedecin, txtVilleMedecin;
     private JTextField txtTelephoneMedecin, txtEmailMedecin, txtRPPSMedecin;
 
-    // Composants de saisie pour Mutuelle
+
     private JTextField txtNomMutuelle, txtAdresseMutuelle, txtCodePostalMutuelle, txtVilleMutuelle;
     private JTextField txtTelephoneMutuelle, txtEmailMutuelle, txtDepartementMutuelle, txtTauxRbMutuelle;
 
-    // Composants de saisie pour Médicament
+
     private JTextField txtNomMedicament, txtCategoriMedicament, txtPrixMedicament, txtDateMiseCirculation, txtQuantiteMedicament;
     private JComboBox<String> cbSansOrdonnanceMedicament;
 
-    // Composants de recherche
+
     private JTextField txtRechercheNom, txtRechercheNss, txtRechercheEmail, txtRechercheRpps, txtRechercheDepartement;
     private JTextField txtRechercheNomMedicament, txtRechercheCategorieMedicament;
 
@@ -65,12 +65,14 @@ public class MainSwing extends JFrame {
         List<Medecin> medecins = (List<Medecin>) donnees.getOrDefault("medecins", new java.util.ArrayList<>());
         List<Pharmacien> pharmaciens = (List<Pharmacien>) donnees.getOrDefault("pharmaciens", new java.util.ArrayList<>());
         List<Client> clients = (List<Client>) donnees.getOrDefault("clients", new java.util.ArrayList<>());
+        List<Ordonnance>ordonnances = (List<Ordonnance>) donnees.getOrDefault("ordonnances", new java.util.ArrayList<>());
 
         Client.setClients(clients);
         Mutuelle.setMutuelles(mutuelles);
         Medicament.setMedicaments(medicaments);
         Medecin.setMedecins(medecins);
         Pharmacien.setPharmacien(pharmaciens);
+        Ordonnance.setOrdonnances(ordonnances);
     }
 
     private void initComponents() {
@@ -79,7 +81,7 @@ public class MainSwing extends JFrame {
         setSize(1200, 800);
         setLocationRelativeTo(null);
 
-        // Gestionnaire de fermeture avec sauvegarde
+
         addWindowListener(new WindowAdapter() {
             @Override
             public void windowClosing(WindowEvent e) {
@@ -87,7 +89,7 @@ public class MainSwing extends JFrame {
             }
         });
 
-        // Création du menu
+
         creerMenu();
 
         // Création des onglets
@@ -100,7 +102,7 @@ public class MainSwing extends JFrame {
         creerPanelMutuelle();
         creerPanelMedicament();
         creerPanelOrdonnance();
-        creerPanelHistorique();
+        creerPanelFacturation();
 
         tabbedPane.addTab("Accueil", panelAccueil);
         tabbedPane.addTab("Clients", panelClient);
@@ -108,7 +110,7 @@ public class MainSwing extends JFrame {
         tabbedPane.addTab("Mutuelles", panelMutuelle);
         tabbedPane.addTab("Médicaments", panelMedicament);
         tabbedPane.addTab("Ordonnances", panelOrdonnance);
-        tabbedPane.addTab("Historique", panelHistorique);
+        tabbedPane.addTab("Historique", panelFacturation);
 
         add(tabbedPane);
     }
@@ -207,56 +209,6 @@ public class MainSwing extends JFrame {
         panelAccueil.add(panelStats, BorderLayout.SOUTH);
     }
 
-//    private void creerPanelAccueil() {
-//        panelAccueil = new JPanel(new BorderLayout());
-//        panelAccueil.setBackground(new Color(240, 248, 255));
-//
-//        // Panel de bienvenue
-//        JPanel panelBienvenue = new JPanel();
-//        panelBienvenue.setBackground(new Color(240, 248, 255));
-//        panelBienvenue.setLayout(new BoxLayout(panelBienvenue, BoxLayout.Y_AXIS));
-//
-//        JLabel lblTitre = new JLabel("Bienvenue dans le Système de Pharmacie");
-//        lblTitre.setFont(new Font("Arial", Font.BOLD, 24));
-//        lblTitre.setAlignmentX(Component.CENTER_ALIGNMENT);
-//        lblTitre.setForeground(new Color(34, 89, 7));
-//
-//        JLabel lblSousTitre = new JLabel("Gestion complète de votre Pharmacie");
-//        lblSousTitre.setFont(new Font("Arial", Font.ITALIC, 16));
-//        lblSousTitre.setAlignmentX(Component.CENTER_ALIGNMENT);
-//        lblSousTitre.setForeground(new Color(99, 180, 70));
-//
-//        panelBienvenue.add(Box.createVerticalGlue());
-//        panelBienvenue.add(lblTitre);
-//        panelBienvenue.add(Box.createRigidArea(new Dimension(0, 10)));
-//        panelBienvenue.add(lblSousTitre);
-//        panelBienvenue.add(Box.createVerticalGlue());
-//
-//        // Panel des statistiques
-//        JPanel panelStats = new JPanel(new GridLayout(2, 2, 10, 10));
-//        panelStats.setBorder(new TitledBorder("Statistiques"));
-//        panelStats.setBackground(new Color(240, 248, 255));
-//
-//        JLabel lblNbClient = new JLabel("Clients : " + Client.getClient().size(), SwingConstants.CENTER);
-//        JLabel lblNbMedicament = new JLabel("Médicaments : " + Medicament.getMedicament().size(), SwingConstants.CENTER);
-//        JLabel lblNbMedecin = new JLabel("Médecins : " + Medecin.getMedecin().size(), SwingConstants.CENTER);
-//        JLabel lblNbMutuelle = new JLabel("Mutuelles : " + Mutuelle.getMutuelle().size(), SwingConstants.CENTER);
-//
-//        Font fontStats = new Font("Arial", Font.BOLD, 14);
-//        lblNbClient.setFont(fontStats);
-//        lblNbMedicament.setFont(fontStats);
-//        lblNbMedecin.setFont(fontStats);
-//        lblNbMutuelle.setFont(fontStats);
-//
-//        panelStats.add(lblNbClient);
-//        panelStats.add(lblNbMedicament);
-//        panelStats.add(lblNbMedecin);
-//        panelStats.add(lblNbMutuelle);
-//
-//        panelAccueil.add(panelBienvenue, BorderLayout.CENTER);
-//        panelAccueil.add(panelStats, BorderLayout.SOUTH);
-//    }
-
     private void creerPanelClient() {
         panelClient = new JPanel(new BorderLayout());
 
@@ -267,69 +219,100 @@ public class MainSwing extends JFrame {
         gbc.insets = new Insets(5, 5, 5, 5);
 
         // Champs de saisie
-        gbc.gridx = 0; gbc.gridy = 0; gbc.anchor = GridBagConstraints.EAST;
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        gbc.anchor = GridBagConstraints.EAST;
         panelSaisieClient.add(new JLabel("Nom :"), gbc);
-        gbc.gridx = 1; gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridx = 1;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
         txtNomClient = new JTextField(15);
         panelSaisieClient.add(txtNomClient, gbc);
 
-        gbc.gridx = 0; gbc.gridy = 1; gbc.fill = GridBagConstraints.NONE;
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        gbc.fill = GridBagConstraints.NONE;
         panelSaisieClient.add(new JLabel("Prénom :"), gbc);
-        gbc.gridx = 1; gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridx = 1;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
         txtPrenomClient = new JTextField(15);
         panelSaisieClient.add(txtPrenomClient, gbc);
 
-        gbc.gridx = 0; gbc.gridy = 2; gbc.fill = GridBagConstraints.NONE;
+        gbc.gridx = 0;
+        gbc.gridy = 2; gbc.fill = GridBagConstraints.NONE;
         panelSaisieClient.add(new JLabel("Adresse :"), gbc);
-        gbc.gridx = 1; gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridx = 1;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
         txtAdresseClient = new JTextField(15);
         panelSaisieClient.add(txtAdresseClient, gbc);
 
-        gbc.gridx = 0; gbc.gridy = 3; gbc.anchor = GridBagConstraints.EAST;
+        gbc.gridx = 0;
+        gbc.gridy = 3;
+        gbc.anchor = GridBagConstraints.EAST;
         panelSaisieClient.add(new JLabel("Code Postal :"), gbc);
-        gbc.gridx = 1; gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridx = 1;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
         txtCodePostalClient = new JTextField(15);
         panelSaisieClient.add(txtCodePostalClient, gbc);
 
-        gbc.gridx = 0; gbc.gridy = 4; gbc.fill = GridBagConstraints.NONE;
+        gbc.gridx = 0;
+        gbc.gridy = 4;
+        gbc.fill = GridBagConstraints.NONE;
         panelSaisieClient.add(new JLabel("Ville :"), gbc);
-        gbc.gridx = 1; gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridx = 1;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
         txtVilleClient = new JTextField(15);
         panelSaisieClient.add(txtVilleClient, gbc);
 
-        gbc.gridx = 0; gbc.gridy = 5; gbc.anchor = GridBagConstraints.EAST;
+        gbc.gridx = 0;
+        gbc.gridy = 5;
+        gbc.anchor = GridBagConstraints.EAST;
         panelSaisieClient.add(new JLabel("Téléphone :"), gbc);
-        gbc.gridx = 1; gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridx = 1;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
         txtTelephoneClient = new JTextField(15);
         panelSaisieClient.add(txtTelephoneClient, gbc);
 
-        gbc.gridx = 2; gbc.gridy = 0; gbc.fill = GridBagConstraints.NONE;
+        gbc.gridx = 2;
+        gbc.gridy = 0;
+        gbc.fill = GridBagConstraints.NONE;
         panelSaisieClient.add(new JLabel("Email :"), gbc);
-        gbc.gridx = 3; gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridx = 3;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
         txtEmailClient = new JTextField(15);
         panelSaisieClient.add(txtEmailClient, gbc);
 
-        gbc.gridx = 2; gbc.gridy = 1; gbc.fill = GridBagConstraints.NONE;
+        gbc.gridx = 2;
+        gbc.gridy = 1;
+        gbc.fill = GridBagConstraints.NONE;
         panelSaisieClient.add(new JLabel("N° Séc. Sociale :"), gbc);
-        gbc.gridx = 3; gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridx = 3;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
         txtNssClient = new JTextField(15);
         panelSaisieClient.add(txtNssClient, gbc);
 
-        gbc.gridx = 2; gbc.gridy = 2; gbc.anchor = GridBagConstraints.EAST;
+        gbc.gridx = 2;
+        gbc.gridy = 2;
+        gbc.anchor = GridBagConstraints.EAST;
         panelSaisieClient.add(new JLabel("Date de Naissance :"), gbc);
-        gbc.gridx = 3; gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridx = 3;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
         txtDateNaissanceClient = new JTextField(15);
         panelSaisieClient.add(txtDateNaissanceClient, gbc);
 
-        gbc.gridx = 2; gbc.gridy = 3; gbc.fill = GridBagConstraints.NONE;
+        gbc.gridx = 2;
+        gbc.gridy = 3;
+        gbc.fill = GridBagConstraints.NONE;
         panelSaisieClient.add(new JLabel("Mutuelle :"), gbc);
-        gbc.gridx = 3; gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridx = 3;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
         txtMutuelleClient = new JTextField(15);
         panelSaisieClient.add(txtMutuelleClient, gbc);
 
-        gbc.gridx = 2; gbc.gridy = 4; gbc.fill = GridBagConstraints.NONE;
+        gbc.gridx = 2;
+        gbc.gridy = 4; gbc.fill = GridBagConstraints.NONE;
         panelSaisieClient.add(new JLabel("Médecin Référent :"), gbc);
-        gbc.gridx = 3; gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridx = 3;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
         txtMedecinrefClient = new JTextField(15);
         panelSaisieClient.add(txtMedecinrefClient, gbc);
 
@@ -350,7 +333,9 @@ public class MainSwing extends JFrame {
         panelBoutons.add(btnSupprimer);
         panelBoutons.add(btnVider);
 
-        gbc.gridx = 0; gbc.gridy = 6; gbc.gridwidth = 4;
+        gbc.gridx = 0;
+        gbc.gridy = 6;
+        gbc.gridwidth = 4;
         panelSaisieClient.add(panelBoutons, gbc);
 
         // Panel de recherche
@@ -360,7 +345,8 @@ public class MainSwing extends JFrame {
         gbc = new GridBagConstraints();
         gbc.insets = new Insets(5, 5, 5, 5);
 
-        gbc.gridx = 0; gbc.gridy = 0;
+        gbc.gridx = 0;
+        gbc.gridy = 0;
         panelRechercheClient.add(new JLabel("Par nom:"), gbc);
         gbc.gridx = 1;
         txtRechercheNom = new JTextField(15);
@@ -370,7 +356,8 @@ public class MainSwing extends JFrame {
         btnRechercheNom.addActionListener(e -> rechercherClientParNom());
         panelRechercheClient.add(btnRechercheNom, gbc);
 
-        gbc.gridx = 0; gbc.gridy = 1;
+        gbc.gridx = 0;
+        gbc.gridy = 1;
         panelRechercheClient.add(new JLabel("Par email:"), gbc);
         gbc.gridx = 1;
         txtRechercheEmail = new JTextField(15);
@@ -380,7 +367,8 @@ public class MainSwing extends JFrame {
         btnRechercheEmail.addActionListener(e -> rechercherClientParEmail());
         panelRechercheClient.add(btnRechercheEmail, gbc);
 
-        gbc.gridx = 0; gbc.gridy = 2;
+        gbc.gridx = 0;
+        gbc.gridy = 2;
         panelRechercheClient.add(new JLabel("Par NSS:"), gbc);
         gbc.gridx = 1;
         txtRechercheNss = new JTextField(15);
@@ -392,7 +380,9 @@ public class MainSwing extends JFrame {
 
         JButton btnAfficherTous = new JButton("Afficher tous");
         btnAfficherTous.addActionListener(e -> chargerClient());
-        gbc.gridx = 0; gbc.gridy = 3; gbc.gridwidth = 3;
+        gbc.gridx = 0;
+        gbc.gridy = 3;
+        gbc.gridwidth = 3;
         panelRechercheClient.add(btnAfficherTous, gbc);
 
         // Panel supérieur
@@ -959,7 +949,7 @@ public class MainSwing extends JFrame {
             }
 
             // Récupération de l'ordonnance depuis la liste globale
-            Ordonnance ordonnance = Ordonnance.getToutesLesOrdonnances().get(selectedRow);
+            Ordonnance ordonnance = Ordonnance.getOrdonnances().get(selectedRow);
             afficherMedicamentsDeLOrdonnance(ordonnance);
         });
 
@@ -1010,33 +1000,33 @@ public class MainSwing extends JFrame {
     }
 
 
-    private void creerPanelHistorique() {
-        panelHistorique = new JPanel(new BorderLayout());
+    private void creerPanelFacturation() {
+        panelFacturation = new JPanel(new BorderLayout());
 
         JPanel panelControles = new JPanel(new FlowLayout());
-        JButton btnActualiserHistorique = new JButton("🔄 Actualiser");
-        btnActualiserHistorique.addActionListener(e -> chargerHistorique());
+        JButton btnActualiserFacturation = new JButton("🔄 Actualiser");
+        btnActualiserFacturation.addActionListener(e -> chargerFacturation());
 
         JButton btnViderHistorique = new JButton("🗑️ Vider l'historique");
-        btnViderHistorique.addActionListener(e -> viderHistorique());
+        btnViderHistorique.addActionListener(e -> viderFacturation());
 
-        panelControles.add(btnActualiserHistorique);
+        panelControles.add(btnActualiserFacturation);
         panelControles.add(btnViderHistorique);
 
         // Table de l'historique
-        String[] colonnesHistorique = {"Date", "Action", "Utilisateur", "Détails"};
-        modelHistorique = new DefaultTableModel(colonnesHistorique, 0) {
+        String[] colonnesFacturation = {"Date", "Action", "Utilisateur", "Détails"};
+        modelFacturation = new DefaultTableModel(colonnesFacturation, 0) {
             @Override
             public boolean isCellEditable(int row, int column) {
                 return false;
             }
         };
-        tableHistorique = new JTable(modelHistorique);
-        JScrollPane scrollHistorique = new JScrollPane(tableHistorique);
-        scrollHistorique.setBorder(new TitledBorder("\uD83D\uDCCB Historique des Actions"));
+        tableFacturation = new JTable(modelFacturation);
+        JScrollPane scrollFacturation = new JScrollPane(tableFacturation);
+        scrollFacturation.setBorder(new TitledBorder("\uD83D\uDCCB Historique des Actions"));
 
-        panelHistorique.add(panelControles, BorderLayout.NORTH);
-        panelHistorique.add(scrollHistorique, BorderLayout.CENTER);
+        panelFacturation.add(panelControles, BorderLayout.NORTH);
+        panelFacturation.add(scrollFacturation, BorderLayout.CENTER);
     }
 
     // Méthodes de chargement des données
@@ -1046,7 +1036,7 @@ public class MainSwing extends JFrame {
         chargerMutuelle();
         chargerMedicament();
         chargerOrdonnances();
-        chargerHistorique();
+        chargerFacturation();
     }
 
     private void chargerClient() {
@@ -1116,7 +1106,7 @@ public class MainSwing extends JFrame {
 
     private void chargerOrdonnances() {
         modelOrdonnance.setRowCount(0);
-        for (Ordonnance ordonnance : Ordonnance.getToutesLesOrdonnances()) {
+        for (Ordonnance ordonnance : Ordonnance.getOrdonnances()) {
             modelOrdonnance.addRow(new Object[]{
                     ordonnance.getClient().getNom() + " " + ordonnance.getClient().getPrenom(),
                     ordonnance.getMedecin().getNom() + " " + ordonnance.getMedecin().getPrenom(),
@@ -1126,14 +1116,14 @@ public class MainSwing extends JFrame {
         }
     }
 
-    private void chargerHistorique() {
-        modelHistorique.setRowCount(0);
+    private void chargerFacturation() {
+        modelFacturation.setRowCount(0);
         // Cette méthode sera complétée avec la gestion de l'historique
         // Pour l'instant, on ajoute juste un placeholder
-        modelHistorique.addRow(new Object[]{new java.util.Date(), "Application démarrée", "Système", "Chargement des données"});
+        modelFacturation.addRow(new Object[]{new java.util.Date(), "Application démarrée", "Système", "Chargement des données"});
     }
 
-    // Méthodes d'ajout
+
     private void ajouterClient() {
         try {
             String nom = txtNomClient.getText().trim();
@@ -1769,11 +1759,10 @@ public class MainSwing extends JFrame {
                 prescriptions.add(new Prescription(medicamentChoisi, quantitePrescrite));
             }
 
-            LocalDate dateOrdonnance = LocalDate.now();// a modifier car c est la date de l ordonnance
-
+            LocalDate dateOrdonnance = LocalDate.now();
             try {
 
-                Ordonnance ordonnance = new Ordonnance(medecinSelectionne[0], clientSelectionne[0], prescriptions, dateOrdonnance);
+                Ordonnance ordonnances = new Ordonnance(medecinSelectionne[0], clientSelectionne[0], prescriptions, dateOrdonnance);
 
                 chargerOrdonnances();
                 dialogOrdonnance.dispose();
@@ -1784,9 +1773,9 @@ public class MainSwing extends JFrame {
                 }
 
                 JOptionPane.showMessageDialog(this,
-                        "Ordonnance créée avec succès!\n\n" +
+                        "Ordonnance créée avec succès!\n" +
                                 "👤 Client: " + clientSelectionne[0].getNom() + " " + clientSelectionne[0].getPrenom() + "\n" +
-                                "👨‍⚕️ Médecin: " + medecinSelectionne[0].getNom() + " " + medecinSelectionne[0].getPrenom() + "\n\n" +
+                                "👨‍⚕️ Médecin: " + medecinSelectionne[0].getNom() + " " + medecinSelectionne[0].getPrenom() + "\n" +
                                 "📦 Médicaments:\n" + medicamentList.toString(),
                         "✅ Succès", JOptionPane.INFORMATION_MESSAGE);
 
@@ -1809,14 +1798,14 @@ public class MainSwing extends JFrame {
         dialogOrdonnance.setVisible(true);
     }
 
-    private void viderHistorique() {
+    private void viderFacturation() {
         int choix = JOptionPane.showConfirmDialog(this,
                 "Êtes-vous sûr de vouloir vider l'historique ?",
                 "Confirmation",
                 JOptionPane.YES_NO_OPTION);
 
         if (choix == JOptionPane.YES_OPTION) {
-            modelHistorique.setRowCount(0);
+            modelFacturation.setRowCount(0);
             JOptionPane.showMessageDialog(this, "Historique vidé avec succès!", "Information", JOptionPane.INFORMATION_MESSAGE);
         }
     }
@@ -1828,6 +1817,7 @@ public class MainSwing extends JFrame {
         donnees.put("mutuelles", Mutuelle.getMutuelles());
         donnees.put("medicaments", Medicament.getMedicaments());
         donnees.put("pharmaciens", Pharmacien.getPharmacien());
+        donnees.put("ordonnances", Ordonnance.getOrdonnances());
         PersitSerializable.sauvegarder(donnees, FICHIER_PERSISTANCE);
         JOptionPane.showMessageDialog(this, "Données sauvegardées avec succès!", "Sauvegarde", JOptionPane.INFORMATION_MESSAGE);
     }
@@ -1844,8 +1834,100 @@ public class MainSwing extends JFrame {
         } else if (choix == JOptionPane.NO_OPTION) {
             System.exit(0);
         }
-
     }
+//        private void creerPanelFacturation() {
+//            panelFacturation = new JPanel(new BorderLayout());
+//
+//            // Panel de saisie (facultatif ici)
+//            JPanel panelSaisieFacture = new JPanel(new GridBagLayout());
+//            panelSaisieFacture.setBorder(new TitledBorder("Saisie / Actions"));
+//            GridBagConstraints gbc = new GridBagConstraints();
+//            gbc.insets = new Insets(5, 5, 5, 5);
+//
+//            // Exemple de champ de saisie (ajouter ce que tu veux ici si besoin)
+//            gbc.gridx = 0;
+//            gbc.gridy = 0;
+//            panelSaisieFacture.add(new JLabel("Aucune saisie directe ici"), gbc);
+//
+//            // Panel de recherche
+//            JPanel panelRechercheFacture = new JPanel(new GridBagLayout());
+//            panelRechercheFacture.setBorder(new TitledBorder("Filtrer les factures"));
+//
+//            gbc = new GridBagConstraints();
+//            gbc.insets = new Insets(5, 5, 5, 5);
+//            gbc.anchor = GridBagConstraints.WEST;
+//
+//            // Date du jour
+//            gbc.gridx = 0;
+//            gbc.gridy = 0;
+//            panelRechercheFacture.add(new JLabel("Factures du jour :"), gbc);
+//            JButton btnFiltrerAujourdHui = new JButton("Aujourd'hui");
+//            gbc.gridx = 1;
+//            panelRechercheFacture.add(btnFiltrerAujourdHui, gbc);
+//
+//            // Date précise
+//            gbc.gridx = 0;
+//            gbc.gridy = 1;
+//            panelRechercheFacture.add(new JLabel("Date précise :"), gbc);
+//            JTextField txtDatePrecise = new JTextField(10);
+//            gbc.gridx = 1;
+//            panelRechercheFacture.add(txtDatePrecise, gbc);
+//            JButton btnFiltrerParDate = new JButton("Filtrer");
+//            gbc.gridx = 2;
+//            panelRechercheFacture.add(btnFiltrerParDate, gbc);
+//
+//            // Période
+//            gbc.gridx = 0;
+//            gbc.gridy = 2;
+//            panelRechercheFacture.add(new JLabel("Période du :"), gbc);
+//            JTextField txtDateDebut = new JTextField(10);
+//            gbc.gridx = 1;
+//            panelRechercheFacture.add(txtDateDebut, gbc);
+//            panelRechercheFacture.add(new JLabel("au :"), gbc);
+//            JTextField txtDateFin = new JTextField(10);
+//            gbc.gridx = 2;
+//            panelRechercheFacture.add(txtDateFin, gbc);
+//            JButton btnFiltrerPeriode = new JButton("Filtrer");
+//            gbc.gridx = 3;
+//            panelRechercheFacture.add(btnFiltrerPeriode, gbc);
+//
+//            // Bouton pour tout afficher
+//            gbc.gridx = 0;
+//            gbc.gridy = 3;
+//            gbc.gridwidth = 4;
+//            JButton btnAfficherToutesFactures = new JButton("Afficher toutes");
+//            panelRechercheFacture.add(btnAfficherToutesFactures, gbc);
+//
+//            // Panel haut
+//            JPanel panelSuperiorFacture = new JPanel(new GridLayout(1, 2));
+//            panelSuperiorFacture.add(panelSaisieFacture);
+//            panelSuperiorFacture.add(panelRechercheFacture);
+//
+//            // Table des Factures
+//            String[] colonnesFactures = {"Date", "Client", "Total TTC"};
+//            modelFacture = new DefaultTableModel(colonnesFactures, 0) {
+//                @Override
+//                public boolean isCellEditable(int row, int column) {
+//                    return false;
+//                }
+//            };
+//
+//            tableFactures = new JTable(modelFacture);
+//            tableFactures.setSelectionMode(ListSelectionModel.SINGLE_SELECTION);
+//            JScrollPane scrollFactures = new JScrollPane(tableFactures);
+//            scrollFactures.setBorder(new TitledBorder("Historique des Factures"));
+//
+//            panelFacturation.add(panelSuperiorFacture, BorderLayout.NORTH);
+//            panelFacturation.add(scrollFactures, BorderLayout.CENTER);
+//
+//            // Écouteurs pour les boutons de filtrage
+//            btnFiltrerAujourdHui.addActionListener(e -> filtrerFacturesAujourdHui());
+//            btnFiltrerParDate.addActionListener(e -> filtrerFacturesParDate(txtDatePrecise.getText()));
+//            btnFiltrerPeriode.addActionListener(e -> filtrerFacturesParPeriode(txtDateDebut.getText(), txtDateFin.getText()));
+//            btnAfficherToutesFactures.addActionListener(e -> chargerToutesFactures());
+//        }
+//
+
 
     public static void main(String[] args) {
         try {

@@ -1774,7 +1774,6 @@ public class MainSwing extends JFrame {
             try {
 
                 Ordonnance ordonnance = new Ordonnance(medecinSelectionne[0], clientSelectionne[0], prescriptions, dateOrdonnance);
-                Ordonnance.ajouterOrdonnance(ordonnance);
 
                 chargerOrdonnances();
                 dialogOrdonnance.dispose();
